@@ -1,0 +1,54 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Find sales</h1>
+			
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<div ng-controller="findSalesCtrl" class="container-fluid container-fullw bg-white">
+	<nit-advanced-searchbox
+	ng-model="searchParams"
+	parameters="availableSearchParams"
+	placeholder="Search...">
+</nit-advanced-searchbox>
+
+<button class="btn btn-primary btn-o" ng-click="search()">
+	Search
+</button>
+<span us-spinner spinner-key="spinner-1"></span> 
+
+<div class="row" style="padding-top:20px">
+	<div class="col-md-12">
+		<div class="list-group" ng-repeat="sale in searchResults">
+			<a class="list-group-item" href="#">
+				<h5 class="list-group-item-heading">Transaction ID : {{sale.transactionid}}</h5>
+				<h5 class="list-group-item-heading">Sale done by : {{sale.username}}</h5>
+				<div class="row" style="padding-top:10px">
+					<div class="col-md-6">
+						<p>Sale Date: {{sale.saledate | date:'mediumDate'}}</p>
+						<p>Verification Date: {{sale.verificationdate | date:'mediumDate'}}</p>
+						<p>Amount: {{sale.amount}}</p>
+						<p>Payment mode: {{sale.paymentmode}}</p>
+					</div>
+					<div class="col-md-6">
+						<p> Name: {{sale.firstname +' '+sale.lastname}}</p>
+						<p> Contact: {{sale.primaryno}}</p>
+						<p> Alt. contact: {{sale.secondaryno}}</p>
+						<p> Address: {{sale.address}}</p>
+						<p> State: {{sale.state}}</p>
+						<p> Zipcode: {{sale.address}}</p>
+						<p> Email: {{sale.email}}</p>
+					</div>
+					
+				</div>
+			</a>			
+		</div>
+	</div>
+</div>
+</div>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<!-- end: YOUR CONTENT HERE -->

@@ -1,0 +1,5 @@
+<div class="input-group">
+				<input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="$parent.start" is-open="$parent.startOpened" ng-init="startOpened = false" min-date="'2016-01-01'" max-date="end" ng-required="true" close-text="Close"  ng-click="$parent.startOpen($event)"/>
+				<span class="input-group-addon">to</span>
+				<input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="$parent.end" is-open="$parent.endOpened" ng-init="endOpened = false" min-date="$parent.start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="$parent.endOpen($event)" />
+			</div>

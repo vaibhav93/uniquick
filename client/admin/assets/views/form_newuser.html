@@ -1,0 +1,75 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Create Users</h1>
+			
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="newUserCtrl" class="container-fluid container-fullw">
+	<form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+		<div class="row">
+			<div class="col-md-6">
+
+				<div class="form-group" ng-class="{'has-error':Form.name.$dirty && Form.name.$invalid, 'has-success':Form.name.$valid}">
+					<label class="control-label">
+						Name <span class="symbol required"></span>
+					</label>
+					<input type="text" placeholder="Enter your Name" class="form-control" name="name" ng-model="newUser.name" required />
+					<span class="error text-small block" ng-if="Form.name.$dirty && Form.name.$invalid">Name is required</span>
+					<span class="success text-small" ng-if="Form.name.$valid">Valid !</span>
+				</div>
+				<div class="form-group" ng-class="{'has-error':Form.contact.$dirty && Form.contact.$invalid, 'has-success':!Form.contact.$invalid && Form.contact.$dirty}">
+					<label class="control-label">
+						Contact <span class="symbol"></span>
+					</label>
+					<input type="number" placeholder="Moblile number" class="form-control" name="contact" ng-model="newUser.contact"ng-minlength="10" ng-change="contactKeyPress()"/>
+					<span class="error text-small block" ng-if="Form.contact.$error.number">Not valid number!</span>
+					<!-- <span class="success text-small" ng-if="Form.contact.$valid">Valid !</span> -->
+				</div>
+				<div class="form-group" ng-class="{'has-error':Form.username.$dirty && Form.username.$invalid, 'has-success':Form.username.$valid}">
+					<label class="control-label">
+						Username <span class="symbol required"></span>
+					</label>
+					<input type="text" placeholder="Username" class="form-control" name="username" ng-model="newUser.username" required>
+					<span class="error text-small block" ng-if="Form.username.$dirty && Form.username.$error.required">Username is required.</span>
+					<span class="success text-small" ng-if="Form.username.$valid">Valid !</span>
+				</div>
+				
+				<div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+					<label class="control-label">
+						Password <span class="symbol required"></span>
+					</label>
+					<input type="password" placeholder="Enter a Password" class="form-control" name="password" ng-model="newUser.password" required/>
+					<span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.required">Password is required.</span>
+					<span class="success text-small block" ng-if="Form.password.$valid">Valid !</span>
+					<span style="color:#000000;font-size:14px" ng-if="Form.password.$valid"><span style="color:#000000"><strong>Password:</strong></span>{{newUser.password}}</span>
+					<!-- <button type="button" class="btn btn-primary" ng-click="generatePassword(6)" style="display:block">
+						Generate Password
+					</button> -->
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+		<span us-spinner spinner-key="spinner-1"></span> 
+			<div class="col-md-12">
+				<div class="pull-left">
+					<button type="submit" class="btn btn-primary">
+						Submit
+					</button>
+					<button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
+						Reset
+					</button>
+				</div>
+			</div>
+		</div>
+		
+	</form>
+</div>
+<!-- end: TABLE WITH FILTERS -->

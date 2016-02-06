@@ -1,0 +1,48 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Manage Users</h1>
+			<span>Delete, modify vendors</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="userTableCtrl" class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+			<table ng-table="tableParams" show-filter="true" class="table">
+				<tbody ng-repeat="user in $data">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'" ng-if="user.username!='admin'">
+						<td width="30%" data-title="'Name'" filter="{ 'name': 'text'}">{{user.name}}</td>
+						<td width="30%" data-title="'Username'" filter="{ 'username': 'text'}">{{user.username}}</td>
+						<td width="20%" data-title="'Sales completed'">{{uesr.sales}}</td>
+											
+						<td data-title="'Delete'">
+								<button
+								class="btn btn-primary btn-o btn-sm"
+								mwl-confirm
+								title="{{ title }}"
+								message="Do you wish to delete ?"
+								confirm-text="Confirm"
+								cancel-text="Cancel"
+								placement="bottom"
+								on-confirm="deleteUser(user.id)"
+								on-cancel="cancelClicked = true"
+								confirm-button-type="danger"
+								cancel-button-type="success">
+								Delete
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+					
+	</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->
