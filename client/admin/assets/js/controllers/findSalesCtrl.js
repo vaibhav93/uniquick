@@ -16,6 +16,7 @@
         { key: "primaryno", name: "Contact" },
 
         ];
+
         $scope.searchResults = [];
         $scope.searchParams = {};
         $scope.search = function(){
@@ -28,16 +29,21 @@
                 var filterKeys = Object.keys($scope.searchParams);
                 angular.forEach($scope.searchParams, function(value, key) {
                     if(key !='query'){
-                      filterCriteria[key] = value;
+                      if (key == 'firstname' || key =='lastname'){
+                            filterCriteria[key] = {"like":'.*'+value+'.*',"options":"i"};
+                      }
+                      else  
+                        filterCriteria[key] = value;
                       filterArr.push(filterCriteria);
                       filterCriteria = {};
                   }
+
               });
                 // console.log(filterArr);
                 Sale.find({filter:{where:{and:filterArr}}},function(sales){
                     usSpinnerService.stop('spinner-1');
                     $scope.searchResults = sales;
-                    cosole.log($scope.searchResults);
+                    console.log($scope.searchResults);
                 },function(err){
                     usSpinnerService.stop('spinner-1');
                     console.log(err);

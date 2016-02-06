@@ -28,13 +28,13 @@ module.exports = function(app) {
         password: 'admin'
       }]
     }, {
-      name: 'users',
+      name: 'agent',
       users: [{
         type:'User',
         name: 'Varun',
-        email: 'user@abc.com',       
-        username: 'user',
-        password: 'user'
+        email: 'agent@abc.com',       
+        username: 'agent',
+        password: 'agent'
       }]
       }];
       

@@ -197,7 +197,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'salesTableCtrl'),
         data:{
             permissions:{
-                only:['users','admin']
+                only:['agent','admin']
             }
         }
     }).state('app.table.findsales', {
@@ -210,7 +210,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'findSalesCtrl'),
         data:{
             permissions:{
-                only:['users']
+                only:['agent']
             }
         }
     }).state('app.table.allsales', {
@@ -297,7 +297,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('ui.select','toaster','spin','angularSpinner','saleCtrl'),
         data:{
             permissions:{
-                only:['users'],
+                only:['agent'],
                 redirectTo: 'login.signin'
             }
         }
