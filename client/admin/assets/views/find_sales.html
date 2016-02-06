@@ -23,9 +23,18 @@
 <div class="row" style="padding-top:20px">
 	<div class="col-md-12">
 		<div class="list-group" ng-repeat="sale in searchResults">
-			<a class="list-group-item" href="#">
-				<h5 class="list-group-item-heading">Transaction ID : {{sale.transactionid}}</h5>
-				<h5 class="list-group-item-heading">Sale done by : {{sale.username}}</h5>
+			<a class="list-group-item">
+				<div class="row">
+					<div class="col-md-6">
+						<h5 class="list-group-item-heading">Transaction ID : {{sale.transactionid}}</h5>
+						<h5 class="list-group-item-heading">Sale done by : {{sale.username}}</h5>
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-primary btn-o pull-right" ui-sref="app.table.mysales({uQuserId:sale.uQUserId})">
+							Make sale
+						</button>
+					</div>
+				</div>
 				<div class="row" style="padding-top:10px">
 					<div class="col-md-6">
 						<p>Sale Date: {{sale.saledate | date:'mediumDate'}}</p>
@@ -42,7 +51,7 @@
 						<p> Zipcode: {{sale.address}}</p>
 						<p> Email: {{sale.email}}</p>
 					</div>
-					
+
 				</div>
 			</a>			
 		</div>
