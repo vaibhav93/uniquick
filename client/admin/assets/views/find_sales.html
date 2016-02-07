@@ -103,7 +103,17 @@
 					<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
 						<div class="panel-body">
 							<div ng-repeat="case in customer.cases | filter : {status: '!'+'open'}">
-								<p> {{case.status}}</p>
+								<div class="row">
+									<div class="col-md-3">
+										<strong>Case ID</strong> : {{case.uid}}
+									</div>
+									<div class="col-md-3">
+										<strong>Opened on</strong> : {{case.opendate | date:'mediumDate'}}
+									</div>
+									<div class="col-md-3">
+										<strong>Closed on</strong> : {{case.closedate | date:'mediumDate'}}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
