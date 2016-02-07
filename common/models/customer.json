@@ -1,0 +1,48 @@
+{
+  "name": "customer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstname": {
+      "type": "string",
+      "required": true
+    },
+    "lastname": {
+      "type": "string",
+      "required": true
+    },
+    "primaryno": {
+      "type": "number",
+      "required": true
+    },
+    "secondaryno": {
+      "type": "number"
+    },
+    "address": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "number"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cases": {
+      "type": "hasMany",
+      "model": "case",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

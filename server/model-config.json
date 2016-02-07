@@ -39,5 +39,17 @@
   "sale": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "customer": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "case": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "counters": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

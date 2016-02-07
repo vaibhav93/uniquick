@@ -22,37 +22,68 @@
 
 <div class="row" style="padding-top:20px">
 	<div class="col-md-12">
+		<div ng-if="searchResults.length ==0" class="row">
+			<div ng-show="!newCustomerFlag" class="col-md-4 col-md-offset-4" style="text-align:center">
+				<p class="mainTitle" style="font-weight:200;font-size:25px">No Customers found.</p>
+				<button class="btn btn-primary btn-o" style="margin-left:auto;margin-right:auto" ng-click="newCustomerFlag = true">
+					Create New
+				</button>
+			</div>
+			<div ng-if="newCustomerFlag" ng-include="'assets/views/form_customer.html'"></div>
+
+		</div>
 		<div class="list-group" ng-repeat="sale in searchResults">
 			<a class="list-group-item">
 				<div class="row">
 					<div class="col-md-6">
-						<h5 class="list-group-item-heading">Transaction ID : {{sale.transactionid}}</h5>
-						<h5 class="list-group-item-heading">Sale done by : {{sale.username}}</h5>
+						<h5 class="list-group-item-heading text-primary">Customer Name : {{sale.firstname +' '+sale.lastname}}</h5>					
 					</div>
-					<div class="col-md-6">
-						<button class="btn btn-primary btn-o pull-right" ui-sref="app.table.mysales({uQuserId:sale.uQUserId})">
-							Make sale
-						</button>
-					</div>
+					
 				</div>
+				<hr style="margin:10px 0">
 				<div class="row" style="padding-top:10px">
 					<div class="col-md-6">
-						<p>Sale Date: {{sale.saledate | date:'mediumDate'}}</p>
-						<p>Verification Date: {{sale.verificationdate | date:'mediumDate'}}</p>
-						<p>Amount: {{sale.amount}}</p>
-						<p>Payment mode: {{sale.paymentmode}}</p>
+						<p> <strong>Email</strong>: {{sale.email}}</p>
+						<p> <strong>Contact</strong>: {{sale.primaryno}}</p>
+						<p> <strong>Alt. contact</strong>: {{sale.secondaryno}}</p>
+						
 					</div>
 					<div class="col-md-6">
-						<p> Name: {{sale.firstname +' '+sale.lastname}}</p>
-						<p> Contact: {{sale.primaryno}}</p>
-						<p> Alt. contact: {{sale.secondaryno}}</p>
-						<p> Address: {{sale.address}}</p>
-						<p> State: {{sale.state}}</p>
-						<p> Zipcode: {{sale.address}}</p>
-						<p> Email: {{sale.email}}</p>
+						<p> <strong>Address</strong>: {{sale.address}}</p>
+						<p> <strong>State</strong>: {{sale.state}}</p>
+						<p> <strong>Zipcode</strong>: {{sale.zipcode}}</p>
+						
 					</div>
 
 				</div>
+				
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading border-dark">
+							<h4 class="panel-title text-green">Open Case</h4>
+						
+						</div>
+						<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
+							<div class="panel-body">
+								<p>
+									Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading border-dark">
+							<h4 class="panel-title text-red">Closed cases</h4>
+						
+						</div>
+						<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
+							<div class="panel-body">
+								<p>
+									Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+								</p>
+							</div>
+						</div>
+					</div>
+				
 			</a>			
 		</div>
 	</div>

@@ -6,34 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "firstname": {
-      "type": "string",
-      "required": true
-    },
-    "lastname": {
-      "type": "string",
-      "required": true
-    },
-    "primaryno": {
-      "type": "number",
-      "required": true
-    },
-    "secondaryno": {
-      "type": "number"
-    },
-    "address": {
-      "type": "string"
-    },
-    "state": {
-      "type": "string"
-    },
-    "zipcode": {
-      "type": "number"
-    },
-    "email": {
-      "type": "string",
-      "required": true
-    },
     "saledate": {
       "type": "Date",
       "required": true
@@ -53,6 +25,10 @@
     "amount": {
       "type": "string",
       "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -60,6 +36,11 @@
     "uQUser": {
       "type": "belongsTo",
       "model": "UQUser",
+      "foreignKey": ""
+    },
+    "case": {
+      "type": "belongsTo",
+      "model": "case",
       "foreignKey": ""
     }
   },
