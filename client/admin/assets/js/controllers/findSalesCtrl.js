@@ -31,6 +31,12 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
         $scope.newCustomerFlag = false;
         $scope.searchResults = [];
         $scope.searchParams = {};
+        $scope.$watch('searchParams', function() {
+            console.log($scope.searchParams);
+            if (Object.keys($scope.searchParams).length == 0){
+                $scope.searchResults.length = 0;
+            }
+        }, true);
         $scope.search = function() {
             usSpinnerService.spin('spinner-1');
             // Sale.find({filter:where})
@@ -125,7 +131,13 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                             }, function(newCase) {
                                 console.log(newCase);
                                 usSpinnerService.stop('spinner-2');
-                            },function(err){
+                                $scope.newCustomerFlag = false;
+                                $scope.searchParams = {
+                                    firstname: customer.firstname,
+                                    primaryno: customer.primaryno
+                                };
+                                $scope.search();
+                            }, function(err) {
                                 console.log(err);
                                 usSpinnerService.stop('spinner-2');
                             })
