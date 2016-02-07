@@ -4,23 +4,25 @@
 
  * Simple table with sorting and filtering on AngularJS
  */
- app.controller('saleCtrl', ["$scope", "$filter","$timeout", "UQUser", "usSpinnerService","toaster","Sale","$localStorage",
-    function ($scope,$filter,$timeout,UQUser,usSpinnerService,toaster,Sale,$localStorage) {
+ app.controller('saleCtrl', ["$scope", "$filter","$timeout","Case", "UQUser", "usSpinnerService","toaster","Sale","$localStorage","$stateParams",
+    function ($scope,$filter,$timeout,Case,UQUser,usSpinnerService,toaster,Sale,$localStorage,$stateParams) {
 
+        if($stateParams.caseId){
+            Case.customer({id:$stateParams.caseId},function(customer){
+                $scope.customer = customer;
+            },function(err){
+                console.log(err);
+            })
+        }
         $scope.sale = {
-            firstname:'',
-            lastname:'',
-            primaryno:null,
-            secondaryno:0,
-            address:'',
-            state:'',
-            zipcode:0,
-            email:'',
             saledate:null,
             verificationdate:null,
             transactionid:'',
             paymentmode:'',
-            amount:''
+            amount:'',
+            recordlink:'',
+            desc:'',
+            status:'Charged'
         };
         
         $scope.generatePassword=function(length) {
@@ -76,7 +78,9 @@
                     // $scope.sale.uQuserId = $localStorage.user.id;
                     UQUser.findById({id:$localStorage.user.id},function(user){
                         $scope.sale.username = user.username;
-                        UQUser.sales.create({id:$localStorage.user.id},$scope.sale,function(success){
+                        $scope.sale.uQUserId = user.id;
+                        $scope.sale.status = 'Charged';
+                        Case.sales.create({id:$stateParams.caseId},$scope.sale,function(success){
                             usSpinnerService.stop('spinner-1');
                             $scope.form.reset(form);
                         // console.log(success);
@@ -102,19 +106,13 @@
 
 
             $scope.sale = {
-                firstname:'',
-                lastname:'',
-                primaryno:null,
-                secondaryno:0,
-                address:'',
-                state:'',
-                zipcode:0,
-                email:'',
                 saledate:null,
                 verificationdate:null,
                 transactionid:'',
                 paymentmode:'',
-                amount:''
+                amount:'',
+                recordlink:'',
+                desc:''
             };
             form.$setPristine(true);
 

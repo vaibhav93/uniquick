@@ -288,7 +288,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             }
         }
     }).state('app.form.sale', {
-        url: '/sale/new/:saleId',
+        url: '/sale/new/:caseId',
         templateUrl: "assets/views/form_sale.html",
         title: 'New Sale',
         ncyBreadcrumb: {

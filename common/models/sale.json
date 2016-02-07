@@ -29,6 +29,12 @@
     "status": {
       "type": "string",
       "required": true
+    },
+    "recordlink": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
     }
   },
   "validations": [],

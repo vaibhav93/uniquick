@@ -33,7 +33,7 @@
 
 		</div>
 		<div class="list-group" ng-repeat="customer in searchResults">
-			<a class="list-group-item">
+			<div class="list-group-item">
 				<div class="row">
 					<div class="col-md-6">
 						<h5 class="list-group-item-heading text-primary">Customer Name : {{customer.firstname +' '+customer.lastname}}</h5>					
@@ -83,12 +83,19 @@
 										</div>
 										<div class="col-md-3">
 											<strong>Opened on</strong> : {{case.opendate | date:'mediumDate'}}
+											
 										</div>
 										<div class="col-md-6">
-											<button class="btn btn-primary btn-o pull-right" style="margin-left:auto;margin-right:auto" ng-click="">
-												Make sale
-											</button>
+											
+											<div style="text-align:right">
+												<a class="btn btn-primary btn-o" ui-sref="app.form.sale({caseId:case.id})">
+													Make sale
+												</a>
+											</div>
 										</div>
+										
+										
+										
 									</div>
 								</div>
 							</div>
@@ -119,7 +126,7 @@
 					</div>
 				</div>
 				
-			</a>			
+			</div>			
 		</div>
 	</div>
 </div>
