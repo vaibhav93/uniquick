@@ -33,10 +33,31 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
         $scope.searchParams = {};
         $scope.$watch('searchParams', function() {
             console.log($scope.searchParams);
-            if (Object.keys($scope.searchParams).length == 0){
+            if (Object.keys($scope.searchParams).length == 0) {
                 $scope.searchResults.length = 0;
             }
         }, true);
+        $scope.openCase = function(customer) {
+            usSpinnerService.spin('spinner-2');
+            Customer.cases.create({
+                id: customer.id
+            }, {
+                status: 'open',
+                opendate: Date.now()
+            }, function(newCase) {
+                console.log(newCase);
+                usSpinnerService.stop('spinner-2');
+                $scope.newCustomerFlag = false;
+                $scope.searchParams = {
+                    firstname: customer.firstname,
+                    primaryno: customer.primaryno
+                };
+                $scope.search();
+            }, function(err) {
+                console.log(err);
+                usSpinnerService.stop('spinner-2');
+            })
+        };
         $scope.search = function() {
             usSpinnerService.spin('spinner-1');
             // Sale.find({filter:where})
@@ -66,9 +87,18 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                             and: filterArr
                         }
                     }
-                }, function(sales) {
+                }, function(customers) {
                     usSpinnerService.stop('spinner-1');
-                    $scope.searchResults = sales;
+                    $scope.searchResults = customers;
+                    angular.forEach($scope.searchResults, function(customer) {
+                        Customer.cases({
+                            id: customer.id
+                        }, function(cases) {
+                            customer.cases = cases;
+                        }, function(err) {
+                            console.log(err)
+                        })
+                    })
                     console.log($scope.searchResults);
                 }, function(err) {
                     usSpinnerService.stop('spinner-1');
@@ -127,7 +157,8 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                             Customer.cases.create({
                                 id: customer.id
                             }, {
-                                status: 'open'
+                                status: 'open',
+                                opendate: Date.now()
                             }, function(newCase) {
                                 console.log(newCase);
                                 usSpinnerService.stop('spinner-2');

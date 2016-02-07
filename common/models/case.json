@@ -9,7 +9,15 @@
     "status": {
       "type": "string",
       "required": true
-    }
+    },
+    "opendate": {
+      "type": "Date",
+      "required": true
+    },
+    "closedate": {
+      "type": "Date",
+      "required": true
+    },
   },
   "validations": [],
   "relations": {
