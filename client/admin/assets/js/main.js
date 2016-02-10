@@ -16,6 +16,11 @@ function ($rootScope, $state, $stateParams,Permission,Authorize,$q,$templateCach
         Authorize.getRole(deferred,'agent');
         $rootScope.role= 'agent';
         return deferred.promise;
+    }).defineRole('supervisor',function(stateParams){
+        var deferred = $q.defer();
+        Authorize.getRole(deferred,'supervisor');
+        $rootScope.role= 'supervisor';
+        return deferred.promise;
     });
     // Set some reference to access them from any scope
     $rootScope.$state = $state;

@@ -36,7 +36,32 @@ module.exports = function(app) {
         username: 'agent',
         password: 'agent'
       }]
-      }];
+      },{
+      name: 'supervisor',
+      users: [{
+        type:'User',
+        name: 'Vaibhav',
+        email: 'supervisor@abc.com',       
+        username: 'supervisor',
+        password: 'supervisor'
+      }]
+      },{
+      name: 'technician',
+      users: [{
+        type:'User',
+        name: 'Sunil',
+        email: 'technician@abc.com',       
+        username: 'technician',
+        password: 'technician'
+      },{
+        type:'User',
+        name: 'Sanjay',
+        email: 'technician2@abc.com',       
+        username: 'technician2',
+        password: 'technician2'
+      },]
+      }
+      ];
       
 
 

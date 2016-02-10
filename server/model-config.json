@@ -26,11 +26,11 @@
   },
   "RoleMapping": {
     "dataSource": "mongoDs",
-    "public": false
+    "public": true
   },
   "Role": {
     "dataSource": "mongoDs",
-    "public": false
+    "public": true
   },
   "UQUser": {
     "dataSource": "mongoDs",

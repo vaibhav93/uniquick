@@ -30,6 +30,11 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
+    },{
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "supervisor",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",

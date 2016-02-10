@@ -1,0 +1,132 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Cases</h1>
+			
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="casesTableCtrl" class="container-fluid container-fullw">
+	<div class="row">
+		<span us-spinner spinner-key="spinner-1"></span> 
+		<div class="col-md-6">
+			<a class="btn btn-primary btn-o btn-sm pull-right" id="download" ng-href="{{csv}}" ng-if="role=='admin'">Download xls<i class="fa fa-file-text" style="padding-left:5px"></i></a>
+		</div>
+		<div class="col-md-12">
+			<table ng-table="tableParams" show-filter="true" class="table">
+				<tbody ng-repeat="case in $data">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'">
+						<td width="10%" data-title="'Case ID'" filter="{ 'transactionid': 'text'}">{{case.uid}}</td>
+						<td width="15%" data-title="'Opened on'">{{case.opendate | date:'mediumDate'}}</td>
+						
+						<td width="20%" data-title="'Assigned to'" sortable="'assigned'"><span ng-if="case.level=='agent'" class="text-red" style="font-weight:300">UNASSIGNED</span><span ng-if="case.level=='technician'" class="text-green" style="font-weight:300;font-size:15px">Assigned to {{case.assigned}}</span></td>
+						<td width="30%" data-title="'Action'">
+							<div ng-if="case.level!='technician'" class="row">
+							<div class="col-xs-8">
+							<div class="form-group" style="margin:8px 0">
+								<ui-select ng-model="person.selected" theme="bootstrap">
+								<ui-select-match placeholder="Select in the list...">
+								{{$select.selected.name}}
+								</ui-select-match>
+								<ui-select-choices repeat="technician in list.people | filter: $select.search">
+							<div ng-bind-html="technician.name | highlight: $select.search"></div>
+							</ui-select-choices>
+							</ui-select>
+							</div>
+							</div>
+							<div class="col-xs-4" style="margin:8px 0">
+							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case.id)">Assign</button>
+							</div>
+							</div>
+						</td>
+
+			<td width="10%" data-title="'Details'">
+				<div class="pull-left margin-right-10" style="margin:8px 0">
+					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="openModal(case.id)">Details</button>
+				</div>
+			</td>
+			<td width="20%" data-title="'Close case'">
+				<div class="pull-left margin-right-10">
+					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="closeCase(case.id)">Close</button>
+				</div>
+			</td>
+
+
+		</tr>
+	</tbody>
+</table>
+
+</div>
+<script type="text/ng-template" id="caseModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Transaction ID: {{sale.transactionid}}</h3>
+	</div>
+	<div class="modal-body">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row padding-bottom-10">
+						Sale by username : <strong>{{user.username}}</strong>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						Customer : <strong>{{sale.firstname}}  {{sale.lastname}}</strong>
+					</div>
+					<div class="row padding-top-10">
+						Contact: <strong>{{sale.primaryno}}</strong>
+					</div>
+					<div class="row padding-top-10">
+						State: <strong>{{sale.state}}</strong>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						Email : <strong>{{booking.email}}</strong>
+					</div>
+					<div class="row  padding-top-10">
+						Alt contact : <strong>{{booking.seconadryno}}</strong>
+					</div>
+					<div class="row  padding-top-10">
+						Zipcode : <strong>{{sale.zipcode}}</strong>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="row padding-top-10 padding-bottom-10">
+						Address : <strong>{{sale.address}}</strong>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						Sale date : <strong>{{sale.saledate | date:'mediumDate'}}</strong>
+					</div>
+					<div class="row padding-top-10">
+						Payment mode: <strong>{{sale.paymentmode}}</strong>
+					</div>
+
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						Verification date : <strong>{{sale.verificationdate | date:'mediumDate'}}</strong>
+					</div>
+					<div class="row  padding-top-10">
+						Amount : <strong>{{sale.amount}}</strong>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->

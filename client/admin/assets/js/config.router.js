@@ -187,6 +187,19 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
                 only:['admin']
             }
         }
+    }).state('app.table.openCases', {
+        url: '/openCases',
+        templateUrl: "assets/views/table_cases.html",
+        title: 'Open cases Table',
+        ncyBreadcrumb: {
+            label: 'Cases'
+        },
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'casesTableCtrl'),
+        data:{
+            permissions:{
+                only:['admin','supervisor']
+            }
+        }
     }).state('app.table.mysales', {
         url: '/sales/:uQuserId',
         templateUrl: "assets/views/table_sales.html",
@@ -210,7 +223,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'findSalesCtrl'),
         data:{
             permissions:{
-                only:['agent']
+                only:['agent','supervisor']
             }
         }
     }).state('app.table.allsales', {

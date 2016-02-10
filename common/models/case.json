@@ -16,6 +16,13 @@
     },
     "closedate": {
       "type": "Date"
+    },
+    "level":{
+      "type": "string"
+    },
+    "assigned":{
+      "type": "string",
+      "default": null
     }
   },
   "validations": [],

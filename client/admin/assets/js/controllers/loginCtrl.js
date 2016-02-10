@@ -28,8 +28,10 @@ app.controller('LoginCtrl', ["UQUser","$scope","$state","$rootScope","$localStor
         $localStorage.role = data.data;
         if(data.data=='admin')
           $state.go('app.dashboard');       
-        else
-          $state.go('app.form.sale')
+        else if (data.data == 'agent')
+          $state.go('app.table.findsales')
+        else 
+          $state.go('app.table.openCases')
       });
         	
       }, function(res) {

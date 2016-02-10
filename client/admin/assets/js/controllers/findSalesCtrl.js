@@ -43,7 +43,8 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                 id: customer.id
             }, {
                 status: 'open',
-                opendate: Date.now()
+                opendate: Date.now(),
+                level: 'agent'
             }, function(newCase) {
                 console.log(newCase);
                 usSpinnerService.stop('spinner-2');
@@ -158,7 +159,8 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                                 id: customer.id
                             }, {
                                 status: 'open',
-                                opendate: Date.now()
+                                opendate: Date.now(),
+                                level: 'agent'
                             }, function(newCase) {
                                 console.log(newCase);
                                 usSpinnerService.stop('spinner-2');
