@@ -40,7 +40,31 @@
 					<i class="ti-home"></i>
 				</div>
 				<div class="item-inner">
-					<span class="title"> Open Cases </span>
+					<span class="title"> Assign Cases </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ng-if="role=='supervisor'" ui-sref-active="active">
+		<a ui-sref="app.table.pickCases">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Pick Case </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ng-if="role=='technician'" ui-sref-active="active">
+		<a ui-sref="app.table.technicianCases">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Assigned Cases </span>
 				</div>
 			</div>
 		</a>

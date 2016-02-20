@@ -2,7 +2,7 @@
 <section id="page-title">
 	<div class="row">
 		<div class="col-sm-8">
-			<h1 class="mainTitle">Assign Cases</h1>
+			<h1 class="mainTitle">Pick Cases</h1>
 			
 		</div>
 		<div ncy-breadcrumb></div>
@@ -11,7 +11,7 @@
 <!-- end: PAGE TITLE -->
 
 <!-- start: TABLE WITH FILTERS -->
-<div ng-controller="casesTableCtrl" class="container-fluid container-fullw">
+<div ng-controller="pickCasesTableCtrl" class="container-fluid container-fullw">
 	<div class="row">
 		<span us-spinner spinner-key="spinner-1"></span> 
 		<div class="col-md-6">
@@ -22,35 +22,22 @@
 				<tbody ng-repeat="case in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
 						<td width="10%" data-title="'Case ID'" filter="{ 'transactionid': 'text'}">{{case.uid}}</td>
-						<td width="15%" data-title="'Opened on'">{{case.opendate | date:'mediumDate'}}</td>
+						<td width="15%" data-title="'Customer'">{{case.customer.firstname+' '+ case.customer.lastname}}</td>
 						
-						<td width="20%" data-title="'Assigned to'" sortable="'assigned'"><span ng-if="case.level=='agent'" class="text-red" style="font-weight:300">UNASSIGNED</span><span ng-if="case.level=='technician'" class="text-green" style="font-weight:300;font-size:15px">Assigned to {{case.assignedName}}</span></td>
-						<td width="30%" data-title="'Action'">
-							<div ng-if="case.level!='technician'" class="row">
-							<div class="col-xs-8">
-							<div class="form-group" style="margin:8px 0">
-								<ui-select ng-model="person.selected" theme="bootstrap">
-								<ui-select-match placeholder="Select in the list...">
-								{{$select.selected.name}}
-								</ui-select-match>
-								<ui-select-choices repeat="technician in list.people | filter: $select.search">
-							<div ng-bind-html="technician.name | highlight: $select.search"></div>
-							</ui-select-choices>
-							</ui-select>
-							</div>
-							</div>
-							<div class="col-xs-4" style="margin:8px 0">
-							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case.id)">Assign</button>
-							</div>
-							</div>
-						</td>
-
+						
 			<td width="10%" data-title="'Details'">
 				<div class="pull-left margin-right-10" style="margin:8px 0">
 					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="openModal(case.id)">Details</button>
 				</div>
 			</td>
-			<td width="20%" data-title="'Close case'">
+			<td width="10%" data-title="'Make Sale'">
+				<div class="pull-left margin-right-10">
+					<a class="btn btn-primary btn-o" ui-sref="app.form.sale({caseId:case.id})">
+													Make sale
+												</a>
+				</div>
+			</td>
+			<td width="10%" data-title="'Close case'">
 				<div class="pull-left margin-right-10">
 					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="closeCase(case.id)">Close</button>
 				</div>

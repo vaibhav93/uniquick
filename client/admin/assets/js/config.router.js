@@ -200,6 +200,32 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
                 only:['admin','supervisor']
             }
         }
+    }).state('app.table.pickCases', {
+        url: '/pickCases',
+        templateUrl: "assets/views/table_pickcases.html",
+        title: 'Open cases Table',
+        ncyBreadcrumb: {
+            label: 'Cases'
+        },
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'pickCasesTableCtrl'),
+        data:{
+            permissions:{
+                only:['admin','supervisor']
+            }
+        }
+    }).state('app.table.technicianCases', {
+        url: '/technicianCases',
+        templateUrl: "assets/views/table_techniciancases.html",
+        title: 'Techinician cases Table',
+        ncyBreadcrumb: {
+            label: 'Cases'
+        },
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'technicianCasesTableCtrl'),
+        data:{
+            permissions:{
+                only:['technician']
+            }
+        }
     }).state('app.table.mysales', {
         url: '/sales/:uQuserId',
         templateUrl: "assets/views/table_sales.html",
@@ -310,7 +336,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('ui.select','toaster','spin','angularSpinner','saleCtrl'),
         data:{
             permissions:{
-                only:['agent'],
+                only:['agent','supervisor','technician'],
                 redirectTo: 'login.signin'
             }
         }

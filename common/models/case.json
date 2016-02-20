@@ -21,7 +21,7 @@
       "type": "string"
     },
     "assigned":{
-      "type": "string",
+      "type": "Object",
       "default": null
     }
   },

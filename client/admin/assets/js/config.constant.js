@@ -58,8 +58,9 @@ app.constant('JS_REQUIRES', {
         'salesTableCtrl': 'assets/js/controllers/salesTableCtrl.js',
         'findSalesCtrl': 'assets/js/controllers/findSalesCtrl.js',
         'casesTableCtrl': 'assets/js/controllers/casesTableCtrl.js',
-
-        
+        'pickCasesTableCtrl': 'assets/js/controllers/pickCasesTableCtrl.js',
+        'technicianCasesTableCtrl': 'assets/js/controllers/technicianCasesTableCtrl.js',
+     
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
     },

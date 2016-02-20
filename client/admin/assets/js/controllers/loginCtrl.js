@@ -30,8 +30,10 @@ app.controller('LoginCtrl', ["UQUser","$scope","$state","$rootScope","$localStor
           $state.go('app.dashboard');       
         else if (data.data == 'agent')
           $state.go('app.table.findsales')
-        else 
+        else if (data.data == 'supervisor')
           $state.go('app.table.openCases')
+        else
+          $state.go('app.table.technicianCases')
       });
         	
       }, function(res) {

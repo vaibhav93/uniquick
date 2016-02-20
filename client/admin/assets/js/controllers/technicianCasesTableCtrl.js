@@ -4,7 +4,7 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
+app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
     function($scope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
 
@@ -42,8 +42,7 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
                     id: caseId
                 }, {
                     level: 'technician',
-                    assignedName: $scope.person.selected.name,
-                    assignedId: $scope.person.selected.id
+                    assigned: $scope.person.selected
                 }, function(updated) {
                     usSpinnerService.stop('spinner-1');
                     $scope.tableParams.reload();
@@ -56,26 +55,7 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
         $scope.list = {
             people: []
         }
-        Role.findOne({
-            filter: {
-                where: {
-                    name: 'technician'
-                }
-            }
-        }, function(role) {
-            console.log(role);
-            Role.principals({
-                id: role.id
-            }, function(principals) {
-                angular.forEach(principals, function(principal) {
-                    UQUser.findById({
-                        id: principal.principalId
-                    }, function(technician) {
-                        $scope.list.people.push(technician);
-                    })
-                })
-            })
-        })
+        
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 10, // count per page
@@ -114,11 +94,20 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
                 // }
                 Case.find({
                     filter: {
-                        where: { and : [{status: 'open'},{level:{neq:'supervisor'}}]
+                        where: { and : [{status: 'open'},{level:'technician'},{assignedId:$localStorage.user.id}]
                             
                         }
                     }
                 }, function(data) {
+                    angular.forEach(data,function(case1){
+                        Case.customer({id:case1.id},function(customer){
+                            case1.customer = customer;
+                        });
+                        Case.sales({id:case1.id},function(sales){
+                            case1.sale = sales[0];
+                        })
+                    });
+
                     applyData(data);
                 })
                 var applyData = function(data) {
