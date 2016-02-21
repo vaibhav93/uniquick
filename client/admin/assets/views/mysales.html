@@ -1,0 +1,98 @@
+<!-- start: DASHBOARD TITLE -->
+<section id="page-title" class="padding-top-15 padding-bottom-15">
+	<div class="row">
+		<div class="col-sm-7">
+			<h1 class="mainTitle" translate-values="{ appName: app.name }">My Sales</h1>
+		</div>
+		<div class="col-sm-5">
+			<!-- start: MINI STATS WITH SPARKLINE -->
+			<!-- /// controller:  'SparklineCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js /// -->
+			
+			<!-- end: MINI STATS WITH SPARKLINE -->
+		</div>
+	</div>
+</section>
+<!-- end: DASHBOARD TITLE -->
+<!-- start: FEATURED BOX LINKS -->
+<div ng-controller="mySalesCtrl" class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-6">
+			<a ui-sref="app.form.newuser">
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					<h1 class="StepTitle text-orange">Charged</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: 19</h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $599</h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			</a>
+		</div>
+
+		<div class="col-sm-6">
+			<a ui-sref="app.table.users">
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					<h1 class="StepTitle text-green">Settled</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: 19</h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $599</h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			</a>
+		</div>
+		<div class="col-sm-6">
+			<a ui-sref="app.table.users">
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					
+					<h1 class="StepTitle text-red">Refunded</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: 19</h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $599</h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			</a>
+		</div><div class="col-sm-6">
+			<a ui-sref="app.table.users">
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					<h1 class="StepTitle text-blue">Charge Back</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: 19</h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $599</h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			</a>
+		</div>
+	</div>
+	
+</div>
+<!-- end: FEATURED BOX LINKS -->
+<!-- start: FIRST SECTION -->
+
+<!-- end: FOURTH SECTION -->

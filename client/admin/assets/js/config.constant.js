@@ -60,6 +60,7 @@ app.constant('JS_REQUIRES', {
         'casesTableCtrl': 'assets/js/controllers/casesTableCtrl.js',
         'pickCasesTableCtrl': 'assets/js/controllers/pickCasesTableCtrl.js',
         'technicianCasesTableCtrl': 'assets/js/controllers/technicianCasesTableCtrl.js',
+        'mySalesCtrl': 'assets/js/controllers/mySalesCtrl.js',
      
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'

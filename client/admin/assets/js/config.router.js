@@ -228,15 +228,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         }
     }).state('app.table.mysales', {
         url: '/sales/:uQuserId',
-        templateUrl: "assets/views/table_sales.html",
-        title: 'Sales Table',
+        templateUrl: "assets/views/mysales.html",
+        title: 'My sales',
         ncyBreadcrumb: {
             label: 'Sales'
         },
-        resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'salesTableCtrl'),
+        resolve: loadSequence('monospaced.elastic', 'ui.mask', 'mySalesCtrl'),
         data:{
             permissions:{
-                only:['agent','admin']
+                only:['agent','supervisor','technician']
             }
         }
     }).state('app.table.findsales', {
