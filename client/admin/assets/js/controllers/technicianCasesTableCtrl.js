@@ -21,13 +21,14 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
                 }
             });
         };
-        $scope.closeCase = function(caseId) {
+        $scope.revertCase = function(caseId) {
             usSpinnerService.spin('spinner-1');
-           Case.prototype$updateAttributes({
+            Case.prototype$updateAttributes({
                     id: caseId
                 }, {
-                    status: 'close',
-                    closedate:Date.now()
+                    level: 'supervisor',
+                    assignedName: null,
+                    assignedId: null
                 }, function(updated) {
                     usSpinnerService.stop('spinner-1');
                     $scope.tableParams.reload();
@@ -35,6 +36,7 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
                 function(err) {
 
                 })
+
         }
         $scope.assign = function(caseId) {
             usSpinnerService.spin('spinner-1');
@@ -55,7 +57,7 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
         $scope.list = {
             people: []
         }
-        
+
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 10, // count per page
@@ -94,16 +96,27 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
                 // }
                 Case.find({
                     filter: {
-                        where: { and : [{status: 'open'},{level:'technician'},{assignedId:$localStorage.user.id}]
-                            
+                        where: {
+                            and: [{
+                                status: 'open'
+                            }, {
+                                level: 'technician'
+                            }, {
+                                assignedId: $localStorage.user.id
+                            }]
+
                         }
                     }
                 }, function(data) {
-                    angular.forEach(data,function(case1){
-                        Case.customer({id:case1.id},function(customer){
+                    angular.forEach(data, function(case1) {
+                        Case.customer({
+                            id: case1.id
+                        }, function(customer) {
                             case1.customer = customer;
                         });
-                        Case.sales({id:case1.id},function(sales){
+                        Case.sales({
+                            id: case1.id
+                        }, function(sales) {
                             case1.sale = sales[0];
                         })
                     });

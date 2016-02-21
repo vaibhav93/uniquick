@@ -117,7 +117,7 @@
 			</div>
 		</a>
 	</li> -->
-	<li ng-if="role=='agent'" ui-sref-active="active">
+	<li ng-if="role=='agent' || role=='technician' || role=='supervisor'" ui-sref-active="active">
 		<a ui-sref="app.table.mysales({uQuserId:user.id})">
 			<div class="item-content">
 				<div class="item-media">
@@ -129,7 +129,7 @@
 			</div>
 		</a>
 	</li>
-	<li ui-sref-active="active">
+	<li ng-if="role=='agent'" ui-sref-active="active">
 		<a ui-sref="app.table.findsales" ui-sref-opts="{reload:true}">
 			<div class="item-content">
 				<div class="item-media">
