@@ -23,10 +23,10 @@
 					<h1 class="StepTitle text-orange">Charged</h1>
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Count: 19</h2> 
+							<h2>Count: <span ng-bind="charged.length"></h2> 
 						</div>
 						<div class="col-sm-6">
-							<h2>Amount : $599</h2>
+							<h2>Amount : $<span ng-bind="chargedTotal"></h2>
 						</div>
 					</div>
 					
@@ -42,10 +42,10 @@
 					<h1 class="StepTitle text-green">Settled</h1>
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Count: 19</h2> 
+							<h2>Count: <span ng-bind="settled.length"></h2> 
 						</div>
 						<div class="col-sm-6">
-							<h2>Amount : $599</h2>
+							<h2>Amount : $<span ng-bind="settledTotal"></h2>
 						</div>
 					</div>
 					
@@ -61,10 +61,10 @@
 					<h1 class="StepTitle text-red">Refunded</h1>
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Count: 19</h2> 
+							<h2>Count: <span ng-bind="refunded.length"></h2> 
 						</div>
 						<div class="col-sm-6">
-							<h2>Amount : $599</h2>
+							<h2>Amount : $<span ng-bind="refundedTotal"></h2>
 						</div>
 					</div>
 					
@@ -78,10 +78,10 @@
 					<h1 class="StepTitle text-blue">Charge Back</h1>
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Count: 19</h2> 
+							<h2>Count: <span ng-bind="chargeback.length"></h2> 
 						</div>
 						<div class="col-sm-6">
-							<h2>Amount : $599</h2>
+							<h2>Amount : $<span ng-bind="chargebackTotal"></h2>
 						</div>
 					</div>
 					
