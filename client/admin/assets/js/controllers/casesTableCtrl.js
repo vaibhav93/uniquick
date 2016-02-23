@@ -13,9 +13,9 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
                 templateUrl: 'caseModal.html',
                 controller: 'caseModalCtrl',
                 resolve: {
-                    sale: function() {
-                        return Sale.findById({
-                            id: saleId
+                    sales: function() {
+                        return Case.sales({
+                            id: caseId
                         }).$promise;
                     }
                 }
@@ -140,14 +140,14 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
     }
 ]);
 
-app.controller('caseModalCtrl', ["$scope", "$modalInstance", "sale", "Sale",
-    function($scope, $modalInstance, sale, Sale) {
-        $scope.sale = sale;
-        $scope.user = Sale.uQUser({
-            id: sale.id
-        }, function(data) {
-            // console.log(data);
-        });
+app.controller('caseModalCtrl', ["$scope", "$modalInstance", "sales", "Sale",
+    function($scope, $modalInstance, sales, Sale) {
+        $scope.sales = sales;
+        // $scope.user = Sale.uQUser({
+        //     id: sale.id
+        // }, function(data) {
+        //     // console.log(data);
+        // });
 
         $scope.ok = function() {
             $modalInstance.close();
