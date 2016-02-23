@@ -10,7 +10,7 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
 
         $scope.openModal = function(caseId) {
             var modalInstance = $modal.open({
-                templateUrl: 'caseModal.html',
+                templateUrl: 'assets/views/caseModal.html',
                 controller: 'caseModalCtrl',
                 resolve: {
                     sales: function() {
@@ -140,21 +140,3 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
     }
 ]);
 
-app.controller('caseModalCtrl', ["$scope", "$modalInstance", "sales", "Sale",
-    function($scope, $modalInstance, sales, Sale) {
-        $scope.sales = sales;
-        // $scope.user = Sale.uQUser({
-        //     id: sale.id
-        // }, function(data) {
-        //     // console.log(data);
-        // });
-
-        $scope.ok = function() {
-            $modalInstance.close();
-        };
-
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        };
-    }
-]);

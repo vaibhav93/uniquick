@@ -194,7 +194,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Cases'
         },
-        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'casesTableCtrl'),
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable','caseModalCtrl', 'casesTableCtrl'),
         data:{
             permissions:{
                 only:['admin','supervisor']
@@ -207,7 +207,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Cases'
         },
-        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'pickCasesTableCtrl'),
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable','caseModalCtrl', 'pickCasesTableCtrl'),
         data:{
             permissions:{
                 only:['admin','supervisor']
@@ -220,7 +220,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Cases'
         },
-        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'technicianCasesTableCtrl'),
+        resolve: loadSequence('monospaced.elastic', 'ui.select','ui.mask', 'ngTable', 'caseModalCtrl','technicianCasesTableCtrl'),
         data:{
             permissions:{
                 only:['technician']
