@@ -1,21 +1,21 @@
 'use strict';
 /**
  * controllers for for city
-
+ 
  * Simple table with sorting and filtering on AngularJS
  */
- app.controller('newUserCtrl', ["$scope", "$filter","$timeout", "UQUser", "usSpinnerService","toaster",
-    function ($scope,$filter,$timeout,UQUser,usSpinnerService,toaster) {
+app.controller('newUserCtrl', ["$scope", "$filter", "$timeout", "UQUser", "usSpinnerService", "toaster", "Role",
+    function($scope, $filter, $timeout, UQUser, usSpinnerService, toaster, Role) {
 
         $scope.newUser = {
-            name:'',
-            contact:null,
-            username:'',
-            password:'',
-            role:''
+            name: '',
+            contact: null,
+            username: '',
+            password: '',
+            role: ''
         };
-        
-        $scope.generatePassword=function(length) {
+
+        $scope.generatePassword = function(length) {
             var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
             var pass = "";
             for (var x = 0; x < length; x++) {
@@ -37,13 +37,14 @@
         $scope.master = $scope.newUser;
         $scope.form = {
 
-            submit: function (form) {
-                
+            submit: function(form) {
+
                 usSpinnerService.spin('spinner-1');
                 var firstError = null;
                 if (form.$invalid) {
 
-                    var field = null, firstError = null;
+                    var field = null,
+                        firstError = null;
                     for (field in form) {
                         if (field[0] != '$') {
                             if (firstError === null && !form[field].$valid) {
@@ -63,36 +64,38 @@
 
                 } else {
                     $scope.newUser.email = $scope.newUser.username + '@uniquick.com';
-                    $scope.newUser.role = 'users';
-                    UQUser.create($scope.newUser,function(success){
+                    $scope.newUser.role = $scope.role;
+                    UQUser.create($scope.newUser, function(success) {
+
                         usSpinnerService.stop('spinner-1');
                         $scope.form.reset(form);
                         // console.log(success);
                         toaster.pop($scope.toasterSuccess.type, $scope.toasterSuccess.title, $scope.toasterSuccess.text);
-                    },function(err){
+                    }, function(err) {
                         usSpinnerService.stop('spinner-1');
                         // console.log('errrrrroorrr');
                         $scope.form.reset(form);
                         console.log(err);
                         toaster.pop($scope.toasterError.type, $scope.toasterError.title, $scope.toasterError.text);
                     });
-                //your code for submit
+                    //your code for submit
+                }
+
+            },
+            reset: function(form) {
+
+                $scope.newUser = {
+                    name: null,
+                    contact: null,
+                    username: null,
+                    password: null,
+                    role: null
+                };
+                form.$setPristine(true);
+
             }
-
-        },
-        reset: function (form) {
-
-            $scope.newUser = {
-                name:null,
-                contact:null,
-                username:null,
-                password:null,
-                role:null
-            };
-            form.$setPristine(true);
-
-        }
-    };
+        };
 
 
-}]);
+    }
+]);

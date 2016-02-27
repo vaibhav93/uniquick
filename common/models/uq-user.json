@@ -28,19 +28,14 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },{
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "supervisor",
+      "principalId": "$authenticated",
       "permission": "ALLOW"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
+      "principalId": "$everyone",
+      "permission": "DENY"
     }
   ],
   "methods": {}

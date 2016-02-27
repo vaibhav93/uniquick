@@ -32,6 +32,19 @@
 					<span class="error text-small block" ng-if="Form.contact.$error.number">Not valid number!</span>
 					<!-- <span class="success text-small" ng-if="Form.contact.$valid">Valid !</span> -->
 				</div>
+				<div class="form-group" ng-class="{'has-error':Form.role.$dirty && Form.role.$invalid, 'has-success':!Form.role.$invalid && Form.role.$dirty}">
+					<label class="control-label">
+						Role <span class="symbol"></span>
+					</label>
+					<select id="form-field-select-1" class="form-control" ng-model="role">
+									<option value="">Select role</option>
+									<option value="agent">Agent</option>
+									<option value="technician">Technician</option>
+									<option value="supervisor">Supervisor</option>
+					</select>
+					<!-- <span class="error text-small block" ng-if="Form.contact.$error.number">Not valid number!</span> -->
+					<!-- <span class="success text-small" ng-if="Form.contact.$valid">Valid !</span> -->
+				</div>
 				<div class="form-group" ng-class="{'has-error':Form.username.$dirty && Form.username.$invalid, 'has-success':Form.username.$valid}">
 					<label class="control-label">
 						Username <span class="symbol required"></span>

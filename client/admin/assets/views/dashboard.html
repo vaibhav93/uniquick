@@ -15,38 +15,85 @@
 </section>
 <!-- end: DASHBOARD TITLE -->
 <!-- start: FEATURED BOX LINKS -->
-<div class="container-fluid container-fullw bg-white">
+<div ng-controller="dashboardCtrl" class="container-fluid container-fullw bg-white">
 	<div class="row">
 		<div class="col-sm-6">
-			<a ui-sref="app.form.newuser">
-			<div class="panel panel-white no-radius text-center">
+			
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
 				<div class="panel-body">
-					<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
-					<h2 class="StepTitle">Create Users</h2>
-					<p class="text-small">
-						To add users, you need to be signed in as the super user.
-					</p>
+					<h1 class="StepTitle text-orange">Charged</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: <span ng-bind="charged.length"></h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $<span ng-bind="chargedTotal"></h2>
+						</div>
+					</div>
+					
 				</div>
 			</div>
-			</a>
+			
 		</div>
 
 		<div class="col-sm-6">
-			<a ui-sref="app.table.users">
-			<div class="panel panel-white no-radius text-center">
+			
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
 				<div class="panel-body">
-					<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
-					<h2 class="StepTitle">Manage Users</h2>
-					<p class="text-small">
-						View or Delete users.
-					</p>
+					<h1 class="StepTitle text-green">Settled</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: <span ng-bind="settled.length"></h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $<span ng-bind="settledTotal"></h2>
+						</div>
+					</div>
+					
 				</div>
 			</div>
-			</a>
+			
+		</div>
+		<div class="col-sm-6">
+			
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					
+					<h1 class="StepTitle text-red">Refunded</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: <span ng-bind="refunded.length"></h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $<span ng-bind="refundedTotal"></h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div><div class="col-sm-6">
+			
+			<div class="panel panel-white no-radius text-center" style="border-width:3px;">
+				<div class="panel-body">
+					<h1 class="StepTitle text-blue">Charge Back</h1>
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Count: <span ng-bind="chargeback.length"></h2> 
+						</div>
+						<div class="col-sm-6">
+							<h2>Amount : $<span ng-bind="chargebackTotal"></h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
 		</div>
 	</div>
 	
 </div>
+
 <!-- end: FEATURED BOX LINKS -->
 <!-- start: FIRST SECTION -->
 

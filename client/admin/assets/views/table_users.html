@@ -19,7 +19,12 @@
 					<tr ng-class-odd="'odd'" ng-class-even="'even'" ng-if="user.username!='admin'">
 						<td width="30%" data-title="'Name'" filter="{ 'name': 'text'}">{{user.name}}</td>
 						<td width="30%" data-title="'Username'" filter="{ 'username': 'text'}">{{user.username}}</td>
-						<td width="20%" data-title="'Sales completed'">{{uesr.sales}}</td>
+						<td data-title="'Change Password'">
+								<button
+								class="btn btn-primary btn-o btn-sm" ng-click="openModal(user.id)">
+								New password
+							</button>
+						</td>
 											
 						<td data-title="'Delete'">
 								<button
@@ -46,3 +51,28 @@
 	</div>
 </div>
 <!-- end: TABLE WITH FILTERS -->
+<script type="text/ng-template" id="changePass.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Change Password</h3>
+	</div>
+	<div class="modal-body">
+		<div class="container-fluid">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="form-group">
+					<label class="control-label">
+						New Password <span class="symbol required"></span>
+					</label>
+					<input type="password" placeholder="Password" class="form-control" ng-model="newPassword"/>
+				</div>
+				<span ng-model="newPassword">
+				<button class="btn btn-primary btn-o btn-sm" ng-click="updatePassword()">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+	</div>
+</script>

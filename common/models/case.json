@@ -17,10 +17,10 @@
     "closedate": {
       "type": "Date"
     },
-    "level":{
+    "level": {
       "type": "string"
     },
-    "assigned":{
+    "assigned": {
       "type": "Object",
       "default": null
     }

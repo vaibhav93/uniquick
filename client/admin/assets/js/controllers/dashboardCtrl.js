@@ -1,30 +1,67 @@
 'use strict';
 /** 
-  * controllers used for the dashboard
-  */
-  app.controller('dashboardCtrl', ["$scope","$rootScope", "Business","usSpinnerService","$timeout", function ($scope,$rootScope,Business,usSpinnerService,$timeout) {
-    $scope.redemptionCode;
-    $scope.validationRes = false;
-    $scope.resStatus = false
-    $scope.redemptionValidate = function(){
-      usSpinnerService.spin('spinner-1');
-      $scope.resStatus = false;
-      Business.codes({id:'564620fb33dc44670d5847e7',filter:{where:{uid:$scope.redemptionCode}}},function(res){
-        console.log(res.length);
-        if(res.length>0)
-          $scope.resStatus = true;
-        $scope.validationRes = true;
-        $timeout(function(){
-          $scope.validationRes=false;
-          $scope.resStatus = false;
-        },3000);
-        usSpinnerService.stop('spinner-1');
-      },function(err){
-        $scope.validationRes = true;
-        usSpinnerService.stop('spinner-1');
-        console.log(err);
-      });
+ * controllers used for the dashboard
+ */
+app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$modal",
+    function($scope, $rootScope, Sale, UQUser, $modal) {
+
+
+        $scope.settled = Sale.find({
+            filter: {
+                where: {
+                    and: [{
+                        status: 'Settled'
+                    }]
+                }
+            }
+        }, function(data) {
+            $scope.settledTotal = calculateAmount(data);
+        });
+        $scope.charged = Sale.find({
+            filter: {
+                where: {
+                    and: [{
+                        status: 'Charged'
+                    }]
+                }
+            }
+        }, function(data) {
+            $scope.chargedTotal = calculateAmount(data);
+        });
+        $scope.refunded = Sale.find({
+            filter: {
+                where: {
+                    and: [{
+                        status: 'Refunded'
+                    }]
+                }
+            }
+        }, function(data) {
+            $scope.refundedTotal = calculateAmount(data);
+        });
+        $scope.chargeback = Sale.find({
+            filter: {
+                where: {
+                    and: [{
+                        status: 'Charge Back'
+                    }]
+                }
+            }
+        }, function(data) {
+            $scope.chargebackTotal = calculateAmount(data);
+        });
+
+        var calculateAmount = function(array) {
+            var totalAmount = 0;
+            var saleAmount
+            angular.forEach(array, function(sale) {
+                saleAmount = Number(sale.amount.substring(1));
+                totalAmount = totalAmount + saleAmount;
+            })
+            return totalAmount;
+        };
+
+
+
     }
-
-  }]);
-
+]);
