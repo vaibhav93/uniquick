@@ -17,6 +17,19 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
             name: 'Charged'
         }];
 
+        $scope.getStatusClass = function(status) {
+            switch (status) {
+                case 'Refunded':
+                    return 'text-red'
+                case 'Charged':
+                    return 'text-orange'
+                case 'Settled':
+                    return 'text-green'
+                case 'Charge back':
+                    return 'text-blue'
+            }
+
+        }
         $scope.statusSelected = {};
         $scope.openModal = function(saleId) {
             var modalInstance = $modal.open({

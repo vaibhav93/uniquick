@@ -33,7 +33,7 @@
 						<td width="8%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
 						
 						<td width="8%" data-title="'Amount'">{{sale.amount}}</td>
-						<td width="10%" data-title="'Status'" filter="{ 'status': 'text'}">{{sale.status}}</td>
+						<td width="10%" data-title="'Status'" filter="{ 'status': 'text'}"><span ng-class="getStatusClass(sale.status)">{{sale.status | uppercase}}</span></td>
 						<td width="30%" data-title="'Change Status'">
 							
 							<div class="col-xs-8">
