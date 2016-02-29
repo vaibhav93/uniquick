@@ -220,9 +220,20 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
     }
 ]);
 
-app.controller('salesModalCtrl', ["$scope", "$modalInstance", "sale", "Sale",
-    function($scope, $modalInstance, sale, Sale) {
+app.controller('salesModalCtrl', ["$scope", "$modalInstance", "sale", "Sale", "Customer",
+    function($scope, $modalInstance, sale, Sale, Customer) {
         $scope.sale = sale;
+
+        Sale.case({
+            id: sale.id
+        }, function(foundCase) {
+            $scope.saleCase = foundCase;
+            Customer.findById({
+                id: foundCase.customerId
+            }, function(customer) {
+                $scope.customer = customer;
+            })
+        })
         $scope.user = Sale.uQUser({
             id: sale.id
         }, function(data) {
