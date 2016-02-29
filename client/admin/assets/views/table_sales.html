@@ -13,6 +13,7 @@
 <!-- start: TABLE WITH FILTERS -->
 <div ng-controller="salesTableCtrl" class="container-fluid container-fullw">
 	<div class="row">
+	<span us-spinner spinner-key="spinner-1"></span> 
 		<div class="col-md-6">
 								<h5>Date Range</h5>
 		<div class="input-group">
@@ -28,11 +29,30 @@
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="sale in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
-						<td width="33%" data-title="'Transaction ID'" filter="{ 'transactionid': 'text'}">{{sale.transactionid}}</td>
-						<td width="33%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
+						<td width="10%" data-title="'Transaction ID'" filter="{ 'transactionid': 'text'}">{{sale.transactionid}}</td>
+						<td width="8%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
 						
-						<td width="33%" data-title="'Amount'" filter="{ 'amount': 'text'}">{{sale.amount}}</td>
-
+						<td width="8%" data-title="'Amount'">{{sale.amount}}</td>
+						<td width="10%" data-title="'Status'" filter="{ 'status': 'text'}">{{sale.status}}</td>
+						<td width="30%" data-title="'Change Status'">
+							
+							<div class="col-xs-8">
+							<div class="form-group" style="margin:8px 0">
+								<ui-select ng-model="sale.newStatus" theme="bootstrap">
+								<ui-select-match placeholder="Select in the list...">
+								{{$select.selected.name}}
+								</ui-select-match>
+								<ui-select-choices repeat="status in statusList | filter: $select.search">
+							<div ng-bind-html="status.name | highlight: $select.search"></div>
+							</ui-select-choices>
+							</ui-select>
+							</div>
+							</div>
+							<div class="col-xs-4" style="margin:8px 0">
+							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="updateStatus(sale)">Assign</button>
+							</div>
+							
+						</td>
 						
 						<td ng-if="role=='admin'" width="10%" data-title="'View Complete'">
 							<div class="pull-left margin-right-10">

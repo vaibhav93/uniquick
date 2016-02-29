@@ -107,6 +107,9 @@ app.controller('saleCtrl', ["$scope", "$filter", "$timeout", "Case", "UQUser", "
 
                         },
                         function(err) {});
+                    var test = function() {
+                        console.log('yooooooooooooo');
+                    }
                     var updateCase = function(role) {
                         if (role == 'technician') {
                             Case.prototype$updateAttributes({

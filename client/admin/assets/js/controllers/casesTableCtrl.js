@@ -23,11 +23,11 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
         };
         $scope.closeCase = function(caseId) {
             usSpinnerService.spin('spinner-1');
-           Case.prototype$updateAttributes({
+            Case.prototype$updateAttributes({
                     id: caseId
                 }, {
                     status: 'close',
-                    closedate:Date.now()
+                    closedate: Date.now()
                 }, function(updated) {
                     usSpinnerService.stop('spinner-1');
                     $scope.tableParams.reload();
@@ -36,14 +36,16 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
 
                 })
         }
-        $scope.assign = function(caseId) {
+        $scope.assign = function(caseArg) {
+            console.log(caseArg);
             usSpinnerService.spin('spinner-1');
             Case.prototype$updateAttributes({
-                    id: caseId
+                    id: caseArg.id
                 }, {
                     level: 'technician',
-                    assignedName: $scope.person.selected.name,
-                    assignedId: $scope.person.selected.id
+                    assignedName: caseArg.newTechnician.name,
+                    assignedId: caseArg.newTechnician.id
+
                 }, function(updated) {
                     usSpinnerService.stop('spinner-1');
                     $scope.tableParams.reload();
@@ -114,8 +116,15 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
                 // }
                 Case.find({
                     filter: {
-                        where: { and : [{status: 'open'},{level:{neq:'supervisor'}}]
-                            
+                        where: {
+                            and: [{
+                                status: 'open'
+                            }, {
+                                level: {
+                                    neq: 'supervisor'
+                                }
+                            }]
+
                         }
                     }
                 }, function(data) {
@@ -139,4 +148,3 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
 
     }
 ]);
-

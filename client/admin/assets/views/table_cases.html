@@ -29,7 +29,7 @@
 							<div ng-if="case.level!='technician'" class="row">
 							<div class="col-xs-8">
 							<div class="form-group" style="margin:8px 0">
-								<ui-select ng-model="person.selected" theme="bootstrap">
+								<ui-select ng-model="case.newTechnician" theme="bootstrap">
 								<ui-select-match placeholder="Select in the list...">
 								{{$select.selected.name}}
 								</ui-select-match>
@@ -40,7 +40,7 @@
 							</div>
 							</div>
 							<div class="col-xs-4" style="margin:8px 0">
-							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case.id)">Assign</button>
+							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case)">Assign</button>
 							</div>
 							</div>
 						</td>
