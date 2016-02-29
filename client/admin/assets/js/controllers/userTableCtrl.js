@@ -82,8 +82,8 @@ app.controller('userTableCtrl', ["$scope", "$filter", "$timeout", "Upload", "ngT
     }
 ]);
 
-app.controller('changePassCtrl', ["$scope", "user", "UQUser", "$modalInstance",
-    function($scope, user, UQUser, $modalInstance) {
+app.controller('changePassCtrl', ["$scope", "user", "UQUser", "$modalInstance", "$timeout",
+    function($scope, user, UQUser, $modalInstance, $timeout) {
         $scope.newPassword;
 
         $scope.updatePassword = function() {
@@ -92,6 +92,10 @@ app.controller('changePassCtrl', ["$scope", "user", "UQUser", "$modalInstance",
                     id: user.id
                 }, {
                     password: $scope.newPassword
+                }, function() {
+                    $timeout(function() {
+                        $modalInstance.close()
+                    }, 500);
                 })
             }
         }

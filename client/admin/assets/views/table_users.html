@@ -65,7 +65,12 @@
 					</label>
 					<input type="password" placeholder="Password" class="form-control" ng-model="newPassword"/>
 				</div>
-				<span ng-model="newPassword">
+				
+			</div>
+			<div class="col-sm-12">
+				<span><strong>Password: </strong>{{newPassword}}</span>
+			</div>
+			<div class="col-sm-12 padding-top-10">
 				<button class="btn btn-primary btn-o btn-sm" ng-click="updatePassword()">Update</button>
 				</div>
 			</div>
