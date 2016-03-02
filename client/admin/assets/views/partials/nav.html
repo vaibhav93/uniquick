@@ -141,7 +141,18 @@
 			</div>
 		</a>
 	</li>
-	
+	<li ng-if="role=='supervisor' || role=='admin'" ui-sref-active="active">
+		<a ui-sref="app.table.closeCases">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Closed Cases </span>
+				</div>
+			</div>
+		</a>
+	</li>
 	
 </ul>
 <!-- end: MAIN NAVIGATION MENU -->

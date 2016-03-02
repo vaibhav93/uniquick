@@ -62,17 +62,16 @@ app.constant('JS_REQUIRES', {
         'technicianCasesTableCtrl': 'assets/js/controllers/technicianCasesTableCtrl.js',
         'mySalesCtrl': 'assets/js/controllers/mySalesCtrl.js',
         'caseModalCtrl': 'assets/js/controllers/casesModal.js',
-     
+        'closedCasesCtrl': 'assets/js/controllers/closedCasesCtrl.js',
+
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
     },
     //*** angularJS Modules
-    modules: [
-    {
+    modules: [{
         name: 'angularSpinner',
         files: ['../bower_components/angular-spinner/angular-spinner.js']
-    },    
-    {
+    }, {
         name: 'angularMoment',
         files: ['../bower_components/angular-moment/angular-moment.min.js']
     }, {

@@ -200,6 +200,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                     only: ['admin', 'supervisor']
                 }
             }
+        }).state('app.table.closeCases', {
+            url: '/closeCases',
+            templateUrl: "assets/views/table_closedCases.html",
+            title: 'Closed cases Table',
+            ncyBreadcrumb: {
+                label: 'Cases'
+            },
+            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'caseModalCtrl', 'closedCasesCtrl'),
+            data: {
+                permissions: {
+                    only: ['admin', 'supervisor']
+                }
+            }
         }).state('app.table.pickCases', {
             url: '/pickCases',
             templateUrl: "assets/views/table_pickcases.html",

@@ -2,7 +2,7 @@
 <section id="page-title">
 	<div class="row">
 		<div class="col-sm-8">
-			<h1 class="mainTitle">Pick Cases</h1>
+			<h1 class="mainTitle">Closed Cases</h1>
 			
 		</div>
 		<div ncy-breadcrumb></div>
@@ -11,7 +11,7 @@
 <!-- end: PAGE TITLE -->
 
 <!-- start: TABLE WITH FILTERS -->
-<div ng-controller="pickCasesTableCtrl" class="container-fluid container-fullw">
+<div ng-controller="closedCasesTableCtrl" class="container-fluid container-fullw">
 	<div class="row">
 		<span us-spinner spinner-key="spinner-1"></span> 
 		<!-- <div class="col-md-6">
@@ -23,6 +23,8 @@
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
 						<td width="10%" data-title="'Case ID'" filter="{ 'transactionid': 'text'}">{{case.uid}}</td>
 						<td width="15%" data-title="'Customer'">{{case.customer.firstname+' '+ case.customer.lastname}}</td>
+						<td width="15%" data-title="'Open Date'">{{case.opendate | date:'mediumDate'}}</td>
+						<td width="15%" data-title="'Close Date'">{{case.closedate | date:'mediumDate'}}</td>
 						
 						
 			<td width="10%" data-title="'Details'">
@@ -30,18 +32,7 @@
 					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="openModal(case.id)">Details</button>
 				</div>
 			</td>
-			<td width="10%" data-title="'Make Sale'">
-				<div class="pull-left margin-right-10">
-					<a class="btn btn-primary btn-o btm-sm" ui-sref="app.form.sale({caseId:case.id})">
-													Make sale
-												</a>
-				</div>
-			</td>
-			<td width="10%" data-title="'Close case'">
-				<div class="pull-left margin-right-10">
-					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="closeCase(case.id)">Close</button>
-				</div>
-			</td>
+			
 
 
 		</tr>

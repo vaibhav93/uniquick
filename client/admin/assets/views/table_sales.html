@@ -1,5 +1,5 @@
 <!-- start: PAGE TITLE -->
-<section id="page-title">
+<section id="page-title" style="padding-bottom:10px">
 	<div class="row">
 		<div class="col-sm-8">
 			<h1 class="mainTitle">My Sales</h1>
@@ -25,7 +25,7 @@
 <div class="col-md-6">
 	<a class="btn btn-primary btn-o btn-sm pull-right" id="download" ng-href="{{csv}}" ng-if="role=='admin'">Download xls<i class="fa fa-file-text" style="padding-left:5px"></i></a>
 </div>
-		<div class="col-md-12">
+		<div class="col-md-12" style="padding-top:15px">
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="sale in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
@@ -49,7 +49,7 @@
 							</div>
 							</div>
 							<div class="col-xs-4" style="margin:8px 0">
-							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="updateStatus(sale)">Assign</button>
+							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="updateStatus(sale)">Submit</button>
 							</div>
 							
 						</td>
