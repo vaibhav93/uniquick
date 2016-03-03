@@ -113,7 +113,7 @@
 						
 						<div class="col-md-8">
 							<p class="input-group">
-								<input type="text" id="saledate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.saledate" is-open="openedsale" min-date="2-16-01-01" max-date="'2017-12-30'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+								<input type="text" id="saledate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.saledate" is-open="openedsale" min-date="'2010-01-01'" max-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-default" ng-click="opensale($event)">
 										<i class="glyphicon glyphicon-calendar"></i>
@@ -129,7 +129,7 @@
 
 							<div class="col-md-8">
 								<p class="input-group">
-									<input type="text" id="verificationdate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.verificationdate" is-open="openedverify" min-date="2-16-01-01" max-date="'2017-12-30'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+									<input type="text" id="verificationdate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.verificationdate" is-open="openedverify" min-date="'2010-01-01'" max-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" ng-click="openverify($event)">
 											<i class="glyphicon glyphicon-calendar"></i>

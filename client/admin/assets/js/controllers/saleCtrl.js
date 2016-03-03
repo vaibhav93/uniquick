@@ -182,7 +182,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
         }, {
             amount: '$599.99'
         }, ];
-
+        $scope.minDate = new Date();
         $scope.opensale = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
