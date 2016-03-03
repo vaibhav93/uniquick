@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('saleCtrl', ["$scope", "$filter", "$timeout", "Case", "UQUser", "usSpinnerService", "toaster", "Sale", "$localStorage", "$stateParams",
-    function($scope, $filter, $timeout, Case, UQUser, usSpinnerService, toaster, Sale, $localStorage, $stateParams) {
+app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeout", "Case", "UQUser", "usSpinnerService", "toaster", "Sale", "$localStorage", "$stateParams",
+    function($scope, $filter, $state, SweetAlert, $timeout, Case, UQUser, usSpinnerService, toaster, Sale, $localStorage, $stateParams) {
 
         if ($stateParams.caseId) {
             Case.customer({
@@ -94,7 +94,15 @@ app.controller('saleCtrl', ["$scope", "$filter", "$timeout", "Case", "UQUser", "
                                 $scope.form.reset(form);
                                 // console.log(success);
                                 updateCase($localStorage.role);
-                                toaster.pop($scope.toasterSuccess.type, $scope.toasterSuccess.title, $scope.toasterSuccess.text);
+                                // toaster.pop($scope.toasterSuccess.type, $scope.toasterSuccess.title, $scope.toasterSuccess.text);
+                                SweetAlert.swal({
+                                    title: "Sucess!",
+                                    text: "Sale done",
+                                    type: "success",
+                                    confirmButtonColor: "#007AFF"
+                                }, function(isConfirm) {
+                                    $state.go('app.table.mysales');
+                                });
                                 // $state.go('app.table.mysales');
                             }, function(err) {
                                 usSpinnerService.stop('spinner-1');
@@ -154,7 +162,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$timeout", "Case", "UQUser", "
         }, {
             amount: '$99.99'
         }, {
-            amount: '$249.99'
+            amount: '$149.99'
         }, {
             amount: '$199.99'
         }, {
