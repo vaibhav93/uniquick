@@ -16,7 +16,7 @@
 		<div class="col-md-12">
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="user in $data">
-					<tr ng-class-odd="'odd'" ng-class-even="'even'" ng-if="user.username!='admin'">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'">
 						<td width="30%" data-title="'Name'" filter="{ 'name': 'text'}">{{user.name}}</td>
 						<td width="30%" data-title="'Username'" filter="{ 'username': 'text'}">{{user.username}}</td>
 						<td data-title="'Change Password'">
@@ -28,6 +28,7 @@
 											
 						<td data-title="'Delete'">
 								<button
+								ng-disabled="user.username=='admin'"
 								class="btn btn-primary btn-o btn-sm"
 								mwl-confirm
 								title="{{ title }}"
