@@ -24,8 +24,8 @@ app.controller('pickCasesTableCtrl', ["$scope", "$localStorage", "Role", "usSpin
         $scope.closeCase = function(caseId) {
             //usSpinnerService.spin('spinner-1');
             var modalInstance = $modal.open({
-                templateUrl: 'closeCaseModal.html',
-                controller: 'closeCaseCtrl',
+                templateUrl: 'assets/views/closeCaseModal.html',
+                controller: 'closeCaseModalCtrl',
                 resolve: {
                     thisCase: function() {
                         return Case.findById({

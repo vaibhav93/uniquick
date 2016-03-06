@@ -194,7 +194,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Cases'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'caseModalCtrl', 'casesTableCtrl'),
+            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'casesTableCtrl'),
             data: {
                 permissions: {
                     only: ['admin', 'supervisor']
@@ -220,7 +220,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Cases'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'caseModalCtrl', 'pickCasesTableCtrl'),
+            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'pickCasesTableCtrl'),
             data: {
                 permissions: {
                     only: ['admin', 'supervisor']

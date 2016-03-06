@@ -63,7 +63,7 @@ app.constant('JS_REQUIRES', {
         'mySalesCtrl': 'assets/js/controllers/mySalesCtrl.js',
         'caseModalCtrl': 'assets/js/controllers/casesModal.js',
         'closedCasesCtrl': 'assets/js/controllers/closedCasesCtrl.js',
-
+        'closeCaseModalCtrl': 'assets/js/controllers/closeCaseModalCtrl.js',
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
     },

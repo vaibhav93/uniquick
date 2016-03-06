@@ -12,6 +12,16 @@
 
 <!-- start: TABLE WITH FILTERS -->
 <div ng-controller="saleCtrl" class="container-fluid container-fullw bg-white">
+	
+	<div class="row" ng-if="sales.length>0">
+		<div class="col-sm-6">
+			<h4>Previous Notes</h4>
+				<div ng-repeat="(key,sale) in sales">
+					<strong>{{key+1}}.</strong> {{sale.notes}}
+				</div>
+			</h3>
+		</div>
+	</div>
 	<form name="Form" id="form1" novalidate ng-submit="form.submit(Form)" class="form form-horizontal">
 		<div class="row">
 			<div class="col-md-6">
@@ -110,7 +120,7 @@
 					</legend>
 					<div class="form-group" ng-class="{'has-error':Form.saledate.$dirty && Form.saledate.$invalid, 'has-success':Form.saledate.$valid}">
 						<label for="saledate" class="control-label col-md-4">Sale date  <span class="symbol required"></label>
-						
+
 						<div class="col-md-8">
 							<p class="input-group">
 								<input type="text" id="saledate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.saledate" is-open="openedsale" min-date="'2010-01-01'" max-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
@@ -124,93 +134,103 @@
 							<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.saledate.$valid">Valid !</span>
 
 						</div>
-	
-							<div class="form-group" ng-class="{'has-error':Form.transactionid.$dirty && Form.transactionid.$invalid, 'has-success':Form.transactionid.$valid}">
-								<label class="control-label col-md-4">
-									Transaction ID  <span class="symbol required"></span>
-								</label>
-								<div class="col-md-8">
-									<input type="text" placeholder="Transaction ID" class="form-control" name="transactionid" ng-model="sale.transactionid" required />
-								</div>
-								<span class="error text-small block col-md-8 col-md-offset-4" ng-if="Form.transactionid.$dirty && Form.transactionid.$invalid">Transaction ID is required</span>
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.transactionid.$valid">Valid !</span>
+
+						<div class="form-group" ng-class="{'has-error':Form.transactionid.$dirty && Form.transactionid.$invalid, 'has-success':Form.transactionid.$valid}">
+							<label class="control-label col-md-4">
+								Transaction ID  <span class="symbol required"></span>
+							</label>
+							<div class="col-md-8">
+								<input type="text" placeholder="Transaction ID" class="form-control" name="transactionid" ng-model="sale.transactionid" required />
 							</div>
-							<div class="form-group" ng-class="{'has-error':Form.paymentmode.$dirty && Form.paymentmode.$invalid, 'has-success':Form.paymentmode.$valid}">
-								<label for="radio1" class="control-label col-md-4" style="margin-top:7px">
-									Payment mode  <span class="symbol required"></span>
-								</label>
-								<div class="col-md-8">
-									<div class="radio clip-radio radio-primary radio-inline">
-										<input type="radio" id="radio1" name="inline" value="Paypal" ng-model="sale.paymentmode">
-										<label for="radio1">
-											Paypal
-										</label>
-									</div>
-									<div class="radio clip-radio radio-primary radio-inline">
-										<input type="radio" id="radio2" name="inline" value="Gateway" ng-model="sale.paymentmode" checked="checked">
-										<label for="radio2">
-											Gateway
-										</label>
-									</div>
+							<span class="error text-small block col-md-8 col-md-offset-4" ng-if="Form.transactionid.$dirty && Form.transactionid.$invalid">Transaction ID is required</span>
+							<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.transactionid.$valid">Valid !</span>
+						</div>
+						<div class="form-group" ng-class="{'has-error':Form.paymentmode.$dirty && Form.paymentmode.$invalid, 'has-success':Form.paymentmode.$valid}">
+							<label for="radio1" class="control-label col-md-4" style="margin-top:7px">
+								Payment mode  <span class="symbol required"></span>
+							</label>
+							<div class="col-md-8">
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio1" name="inline" value="Paypal" ng-model="sale.paymentmode">
+									<label for="radio1">
+										Paypal
+									</label>
 								</div>
-								<span class="error text-small block col-md-8 col-md-offset-4" ng-if="Form.paymentmode.$dirty && Form.paymentmode.$invalid">Payment mode is required</span>
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.paymentmode.$valid">Valid !</span>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-4">
-									Amount  <span class="symbol required"></span>
-								</label>
-								<div class="col-md-8">
-									<ui-select ng-model="sale.amount" theme="bootstrap">
-									<ui-select-match placeholder="Select in the list...">
-									{{$select.selected.amount}}
-								</ui-select-match>
-								<ui-select-choices repeat="cost in costs">
-								<div ng-bind-html="cost.amount"></div>
-								
-								</ui-select-choices>
-								</ui-select>
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio2" name="inline" value="Gateway" ng-model="sale.paymentmode" checked="checked">
+									<label for="radio2">
+										Gateway
+									</label>
 								</div>
 							</div>
-							<div class="form-group" ng-class="{'has-error':Form.recordlink.$dirty && Form.recordlink.$invalid, 'has-success':Form.recordlink.$valid && Form.recordlink.$dirty}">
-								<label class="control-label col-md-4">
-									Recording link  <span class="symbol"></span>
-								</label>
-								<div class="col-md-8">
-									<input type="text" placeholder="Recording link" class="form-control" name="recordlink" ng-model="sale.recordlink"/>
-								</div>
-								
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.recordlink.$valid && Form.recordlink.$dirty">Valid !</span>
-							</div>
-							<div class="form-group" ng-class="{'has-error':Form.desc.$dirty && Form.desc.$invalid, 'has-success':Form.desc.$valid && Form.desc.$dirty}">
-								<label class="control-label col-md-4">
-									Description  <span class="symbol"></span>
-								</label>
-								<div class="col-md-8">
-									<input type="text" placeholder="Description" class="form-control" name="desc" ng-model="sale.desc"/>
-								</div>
-								
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.status.$valid && Form.status.$dirty">Valid !</span>
-							</div>
-							<div class="form-group" ng-class="{'has-error':Form.status.$dirty && Form.status.$invalid, 'has-success':Form.status.$valid && Form.status.$dirty}">
-								<label class="control-label col-md-4">
-									Status  <span class="symbol"></span>
-								</label>
-								<div class="col-md-8">
-									<input type="text" class="form-control" name="status" ng-model="sale.status" readonly/>
-								</div>
-								
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.status.$valid && Form.status.$dirty">Valid !</span>
-							</div>
-			</fieldset>
-		</div>
-		<div class="row">
-			<span us-spinner spinner-key="spinner-1"></span> 
-			<div class="col-md-12" style="padding-left:30px">
-				<div class="pull-left">
-					<button type="submit" class="btn btn-primary">
-						Submit
-					</button>
+							<span class="error text-small block col-md-8 col-md-offset-4" ng-if="Form.paymentmode.$dirty && Form.paymentmode.$invalid">Payment mode is required</span>
+							<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.paymentmode.$valid">Valid !</span>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">
+								Amount  <span class="symbol required"></span>
+							</label>
+							<div class="col-md-8">
+								<ui-select ng-model="sale.amount" theme="bootstrap">
+								<ui-select-match placeholder="Select in the list...">
+								{{$select.selected.amount}}
+							</ui-select-match>
+							<ui-select-choices repeat="cost in costs">
+							<div ng-bind-html="cost.amount"></div>
+
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error':Form.recordlink.$dirty && Form.recordlink.$invalid, 'has-success':Form.recordlink.$valid && Form.recordlink.$dirty}">
+				<label class="control-label col-md-4">
+					Recording link  <span class="symbol"></span>
+				</label>
+				<div class="col-md-8">
+					<input type="text" placeholder="Recording link" class="form-control" name="recordlink" ng-model="sale.recordlink"/>
+				</div>
+
+				<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.recordlink.$valid && Form.recordlink.$dirty">Valid !</span>
+			</div>
+			<div class="form-group" ng-class="{'has-error':Form.desc.$dirty && Form.desc.$invalid, 'has-success':Form.desc.$valid && Form.desc.$dirty}">
+				<label class="control-label col-md-4">
+					Description  <span class="symbol"></span>
+				</label>
+				<div class="col-md-8">
+					<input type="text" placeholder="Description" class="form-control" name="desc" ng-model="sale.desc"/>
+				</div>
+
+				<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.status.$valid && Form.status.$dirty">Valid !</span>
+			</div>
+			<div class="form-group" ng-class="{'has-error':Form.status.$dirty && Form.status.$invalid, 'has-success':Form.status.$valid && Form.status.$dirty}">
+				<label class="control-label col-md-4">
+					Status  <span class="symbol"></span>
+				</label>
+				<div class="col-md-8">
+					<input type="text" class="form-control" name="status" ng-model="sale.status" readonly/>
+				</div>
+
+				<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.status.$valid && Form.status.$dirty">Valid !</span>
+			</div>
+			<div class="form-group" ng-class="{'has-error':Form.notes.$dirty && Form.notes.$invalid, 'has-success':Form.notes.$valid && Form.notes.$dirty}">
+				<label class="control-label col-md-4">
+					Notes  <span class="symbol"></span>
+				</label>
+				<div class="col-md-8">
+					<textarea rows="4" class="form-control" name="notes" ng-model="sale.notes"/></textarea> 
+				</div>
+
+				<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.notes.$valid && Form.notes.$dirty">Valid !</span>
+			</div>
+		</fieldset>
+	</div>
+	<div class="row">
+		<span us-spinner spinner-key="spinner-1"></span> 
+		<div class="col-md-12" style="padding-left:30px">
+			<div class="pull-left">
+				<button type="submit" class="btn btn-primary">
+					Submit
+				</button>
 					<!-- <button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
 						Reset
 					</button> -->

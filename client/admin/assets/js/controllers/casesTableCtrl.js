@@ -22,19 +22,19 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
             });
         };
         $scope.closeCase = function(caseId) {
-            usSpinnerService.spin('spinner-1');
-            Case.prototype$updateAttributes({
-                    id: caseId
-                }, {
-                    status: 'close',
-                    closedate: Date.now()
-                }, function(updated) {
-                    usSpinnerService.stop('spinner-1');
-                    $scope.tableParams.reload();
-                },
-                function(err) {
+            //usSpinnerService.spin('spinner-1');
+            var modalInstance = $modal.open({
+                templateUrl: 'assets/views/closeCaseModal.html',
+                controller: 'closeCaseModalCtrl',
+                resolve: {
+                    thisCase: function() {
+                        return Case.findById({
+                            id: caseId
+                        }).$promise;
+                    }
+                }
+            });
 
-                })
         }
         $scope.assign = function(caseArg) {
             console.log(caseArg);
@@ -87,33 +87,7 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
         }, {
             total: 0, // length of data
             getData: function($defer, params) {
-                // use build-in angular filter
-                // if($stateParams.uQuserId && $localStorage.role =='users'){
-                //     if(!$scope.start || !$scope.end){
-                //         UQUser.sales({id:$stateParams.uQuserId}).$promise.then(function(data){
 
-                //             applyData(data);                
-                //         })
-                //     } else {
-                //         UQUser.sales({id:$stateParams.uQuserId,filter:{where:{saledate:{between:[$scope.start,$scope.end]}}}}).$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     }
-                // } else {
-                //     if(!$scope.start || !$scope.end){
-                //         Sale.find().$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     } else {
-                //         Sale.find({filter:{where:{saledate:{between:[$scope.start,$scope.end]}}}}).$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     }
-
-                // }
                 Case.find({
                     filter: {
                         where: {
@@ -128,6 +102,13 @@ app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerS
                         }
                     }
                 }, function(data) {
+                    angular.forEach(data, function(thisCase) {
+                        Case.customer({
+                            id: thisCase.id
+                        }, function(customer) {
+                            thisCase.customer = customer;
+                        })
+                    })
                     applyData(data);
                 })
                 var applyData = function(data) {

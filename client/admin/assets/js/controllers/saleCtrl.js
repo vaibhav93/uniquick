@@ -27,6 +27,10 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
             status: 'Charged'
         };
 
+        $scope.sales = Case.sales({
+            id: $stateParams.caseId
+        })
+
         $scope.generatePassword = function(length) {
             var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
             var pass = "";

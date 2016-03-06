@@ -22,9 +22,10 @@
 				<tbody ng-repeat="case in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
 						<td width="10%" data-title="'Case ID'" filter="{ 'transactionid': 'text'}">{{case.uid}}</td>
-						<td width="15%" data-title="'Customer'">{{case.customer.firstname+' '+ case.customer.lastname}}</td>
+						<td width="15%" data-title="'Customer name'">{{case.customer.firstname+' '+ case.customer.lastname}}</td>
+						<td width="15%" data-title="'Customer ID'">{{case.customer.uid}}</td>
 						<td width="15%" data-title="'Amount'">{{case.sale.amount}}</td>
-						<td width="15%" data-title="'Sale by'">{{case.sale.user.name}}</td>
+						<td width="10%" data-title="'Sale by'">{{case.sale.user.name}}</td>
 						
 
 			<td width="10%" data-title="'Details'">
