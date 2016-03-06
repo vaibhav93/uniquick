@@ -123,7 +123,7 @@ app.get('/api/file/:name', function(req, res) {
         }, {
             label: 'Verification Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
-                return moment(row.verificationdate).format('DD-MM-YYYY');
+                return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
             },
             default: 'NULL' // default if value fn returns falsy
         }, {
@@ -137,6 +137,10 @@ app.get('/api/file/:name', function(req, res) {
         }, {
             label: 'Amount', // (optional, column will be labeled 'path.to.something' if not defined)
             value: 'amount', // data.path.to.something
+            default: 'NULL' // default if value is not found (optional, overrides `defaultValue` for column)
+        }, {
+            label: 'Customer ID', // (optional, column will be labeled 'path.to.something' if not defined)
+            value: 'customer.uid', // data.path.to.something
             default: 'NULL' // default if value is not found (optional, overrides `defaultValue` for column)
         }, {
             label: 'Customer first name', // (optional, column will be labeled 'path.to.something' if not defined)
