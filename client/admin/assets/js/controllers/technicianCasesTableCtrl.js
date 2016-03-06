@@ -7,7 +7,9 @@
 app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
     function($scope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
-
+        $scope.$on('reloadTable', function() {
+            $scope.tableParams.reload()
+        })
         $scope.openModal = function(caseId) {
             var modalInstance = $modal.open({
                 templateUrl: 'assets/views/caseModal.html',
@@ -30,8 +32,10 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
                         return Case.findById({
                             id: caseId
                         }).$promise;
-                    }
-                }
+                    },
+
+                },
+                scope: $scope
             });
             //usSpinnerService.spin('spinner-1');
 
@@ -128,7 +132,7 @@ app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale
                     assignedId: null
                 }, function(updated) {
                     //usSpinnerService.stop('spinner-1');
-                    $scope.tableParams.reload();
+                    $scope.$emit('reloadTable');
                 },
                 function(err) {
 

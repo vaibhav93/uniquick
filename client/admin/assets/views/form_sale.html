@@ -13,10 +13,10 @@
 <!-- start: TABLE WITH FILTERS -->
 <div ng-controller="saleCtrl" class="container-fluid container-fullw bg-white">
 	
-	<div class="row" ng-if="notes.length>0">
+	<div class="row" ng-if="caseNotes.length>0">
 		<div class="col-sm-6">
 			<h4>Previous Notes</h4>
-				<div ng-repeat="(key,note) in notes">
+				<div ng-repeat="(key,note) in caseNotes">
 					<strong>{{key+1}}.</strong> {{note.text}}
 				</div>
 			</h3>

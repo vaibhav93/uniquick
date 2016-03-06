@@ -14,9 +14,9 @@
 <div ng-controller="technicianCasesTableCtrl" class="container-fluid container-fullw">
 	<div class="row">
 		<span us-spinner spinner-key="spinner-1"></span> 
-		<div class="col-md-6">
+		<!-- <div class="col-md-6">
 			<a class="btn btn-primary btn-o btn-sm pull-right" id="download" ng-href="{{csv}}" ng-if="role=='admin'">Download xls<i class="fa fa-file-text" style="padding-left:5px"></i></a>
-		</div>
+		</div> -->
 		<div class="col-md-12">
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="case in $data">

@@ -14,7 +14,7 @@ app.controller('closeCaseModalCtrl', ["$scope", "$modalInstance", "thisCase", "S
                     closedate: Date.now(),
                     verificationdate: $scope.thisCase.verificationdate
                 }, function(updated) {
-                    $scope.tableParams.reload();
+                    $scope.$emit('reloadTable2');
                 },
                 function(err) {
 

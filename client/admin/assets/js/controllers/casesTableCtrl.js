@@ -7,7 +7,9 @@
 app.controller('casesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
     function($scope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
-
+        $scope.$on('reloadTable2', function() {
+            $scope.tableParams.reload()
+        });
         $scope.openModal = function(caseId) {
             var modalInstance = $modal.open({
                 templateUrl: 'assets/views/caseModal.html',

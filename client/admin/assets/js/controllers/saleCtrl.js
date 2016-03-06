@@ -27,7 +27,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
             status: 'Charged'
         };
 
-        $scope.notes = Case.notes({
+        $scope.caseNotes = Case.notes({
             id: $stateParams.caseId
         })
 
