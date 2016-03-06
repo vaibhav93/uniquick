@@ -27,7 +27,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
             status: 'Charged'
         };
 
-        $scope.sales = Case.sales({
+        $scope.notes = Case.notes({
             id: $stateParams.caseId
         })
 
@@ -95,6 +95,12 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
                                 id: $stateParams.caseId
                             }, $scope.sale, function(success) {
                                 usSpinnerService.stop('spinner-1');
+                                Case.notes.create({
+                                    id: $stateParams.caseId
+                                }, {
+                                    text: $scope.notes,
+                                    user: user
+                                });
                                 $scope.form.reset(form);
                                 // console.log(success);
                                 updateCase($localStorage.role);
@@ -116,6 +122,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
                                 console.log(err);
                                 toaster.pop($scope.toasterError.type, $scope.toasterError.title, $scope.toasterError.text);
                             });
+
 
                         },
                         function(err) {});

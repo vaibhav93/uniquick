@@ -22,20 +22,19 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
             });
         };
         $scope.revertCase = function(caseId) {
-            usSpinnerService.spin('spinner-1');
-            Case.prototype$updateAttributes({
-                    id: caseId
-                }, {
-                    level: 'supervisor',
-                    assignedName: null,
-                    assignedId: null
-                }, function(updated) {
-                    usSpinnerService.stop('spinner-1');
-                    $scope.tableParams.reload();
-                },
-                function(err) {
+            var modalInstance = $modal.open({
+                templateUrl: 'assets/views/revertModal.html',
+                controller: 'revertModalCtrl',
+                resolve: {
+                    thisCase: function() {
+                        return Case.findById({
+                            id: caseId
+                        }).$promise;
+                    }
+                }
+            });
+            //usSpinnerService.spin('spinner-1');
 
-                })
 
         }
         $scope.assign = function(caseId) {
@@ -67,33 +66,7 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
         }, {
             total: 0, // length of data
             getData: function($defer, params) {
-                // use build-in angular filter
-                // if($stateParams.uQuserId && $localStorage.role =='users'){
-                //     if(!$scope.start || !$scope.end){
-                //         UQUser.sales({id:$stateParams.uQuserId}).$promise.then(function(data){
 
-                //             applyData(data);                
-                //         })
-                //     } else {
-                //         UQUser.sales({id:$stateParams.uQuserId,filter:{where:{saledate:{between:[$scope.start,$scope.end]}}}}).$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     }
-                // } else {
-                //     if(!$scope.start || !$scope.end){
-                //         Sale.find().$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     } else {
-                //         Sale.find({filter:{where:{saledate:{between:[$scope.start,$scope.end]}}}}).$promise.then(function(data){
-
-                //             applyData(data);                
-                //         })
-                //     }
-
-                // }
                 Case.find({
                     filter: {
                         where: {
@@ -138,6 +111,48 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "
 
 
         });
+
+    }
+]);
+app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale", "Case", "$localStorage",
+
+    function($scope, $modalInstance, thisCase, Sale, Case, $localStorage) {
+        $scope.thisCase = thisCase;
+
+        $scope.ok = function() {
+            Case.prototype$updateAttributes({
+                    id: thisCase.id
+                }, {
+                    level: 'supervisor',
+                    assignedName: null,
+                    assignedId: null
+                }, function(updated) {
+                    //usSpinnerService.stop('spinner-1');
+                    $scope.tableParams.reload();
+                },
+                function(err) {
+
+                })
+            if ($scope.text.length > 0) {
+                Case.notes.create({
+                        id: thisCase.id
+                    }, {
+                        text: $scope.text,
+                        user: $localStorage.user
+                    }, function(updated) {
+                        // $scope.tableParams.reload();
+                    },
+                    function(err) {
+
+                    })
+            }
+            $modalInstance.close();
+
+        };
+
+        $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+        };
 
     }
 ]);

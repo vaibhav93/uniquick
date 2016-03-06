@@ -1,55 +1,59 @@
 {
-    "_meta": {
-        "sources": [
-            "loopback/common/models",
-            "loopback/server/models",
-            "../common/models",
-            "./models"
-        ],
-        "mixins": [
-            "loopback/common/mixins",
-            "loopback/server/mixins",
-            "../common/mixins",
-            "./mixins"
-        ]
-    },
-    "User": {
-        "dataSource": "db"
-    },
-    "AccessToken": {
-        "dataSource": "mongoDs",
-        "public": false
-    },
-    "ACL": {
-        "dataSource": "mongoDs",
-        "public": false
-    },
-    "RoleMapping": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "Role": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "UQUser": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "sale": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "customer": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "case": {
-        "dataSource": "mongoDs",
-        "public": true
-    },
-    "counters": {
-        "dataSource": "mongoDs",
-        "public": true
-    }
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "UQUser": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "sale": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "customer": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "case": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "counters": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "note": {
+    "dataSource": "mongoDs",
+    "public": true
+  }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "note",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "text": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "case": {
+      "type": "belongsTo",
+      "model": "case",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
