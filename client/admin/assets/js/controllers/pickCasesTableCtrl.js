@@ -33,7 +33,9 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
                         return Case.findById({
                             id: caseId
                         }).$promise;
-                    }
+},                tableParams: function() {
+                    return $scope.tableParams;
+                }
                 }
             });
 

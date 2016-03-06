@@ -33,6 +33,9 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$rootScope", "$localStora
                             id: caseId
                         }).$promise;
                     },
+                    tableParams: function() {
+                        return $scope.tableParams;
+                    }
 
                 },
                 scope: $scope
@@ -118,9 +121,9 @@ app.controller('technicianCasesTableCtrl', ["$scope", "$rootScope", "$localStora
 
     }
 ]);
-app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale", "Case", "$localStorage",
+app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale", "Case", "$localStorage", "tableParams",
 
-    function($scope, $modalInstance, thisCase, Sale, Case, $localStorage) {
+    function($scope, $modalInstance, thisCase, Sale, Case, $localStorage, tableParams) {
         $scope.thisCase = thisCase;
 
         $scope.ok = function() {
@@ -132,7 +135,8 @@ app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale
                     assignedId: null
                 }, function(updated) {
                     //usSpinnerService.stop('spinner-1');
-                    $scope.$emit('reloadTable');
+                    // $scope.$emit('reloadTable');
+                    tableParams.reload();
                 },
                 function(err) {
 

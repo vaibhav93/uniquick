@@ -2,8 +2,8 @@
 /** 
  * controller for AngularJS-Toaster
  */
-app.controller('closeCaseModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale", "Case",
-    function($scope, $modalInstance, thisCase, Sale, Case) {
+app.controller('closeCaseModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale", "Case", "tableParams",
+    function($scope, $modalInstance, thisCase, Sale, Case, tableParams) {
         $scope.thisCase = thisCase;
 
         $scope.ok = function() {
@@ -14,7 +14,8 @@ app.controller('closeCaseModalCtrl', ["$scope", "$modalInstance", "thisCase", "S
                     closedate: Date.now(),
                     verificationdate: $scope.thisCase.verificationdate
                 }, function(updated) {
-                    $scope.$emit('reloadTable2');
+                    // $scope.$emit('reloadTable2');
+                    tableParams.reload();
                 },
                 function(err) {
 
