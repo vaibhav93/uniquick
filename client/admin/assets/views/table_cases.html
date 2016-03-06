@@ -41,7 +41,7 @@
 							</div>
 							</div>
 							<div class="col-xs-4" style="margin:8px 0">
-							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case)">Assign</button>
+							<button ng-disabled="!case.newTechnician" class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="assign(case)">Assign</button>
 							</div>
 							</div>
 						</td>

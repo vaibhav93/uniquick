@@ -4,10 +4,10 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('pickCasesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
-    function($scope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
+app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
+    function($scope, $rootScope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
-        $scope.$on('reloadTable2', function() {
+        $rootScope.$on('reloadTable2', function() {
             $scope.tableParams.reload()
         });
         $scope.openModal = function(caseId) {

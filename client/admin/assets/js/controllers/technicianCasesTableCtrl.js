@@ -4,10 +4,10 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('technicianCasesTableCtrl', ["$scope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
-    function($scope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
+app.controller('technicianCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
+    function($scope, $rootScope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
-        $scope.$on('reloadTable', function() {
+        $rootScope.$on('reloadTable', function() {
             $scope.tableParams.reload()
         })
         $scope.openModal = function(caseId) {
@@ -137,7 +137,7 @@ app.controller('revertModalCtrl', ["$scope", "$modalInstance", "thisCase", "Sale
                 function(err) {
 
                 })
-            if ($scope.text.length > 0) {
+            if ($scope.text && $scope.text.length > 0) {
                 Case.notes.create({
                         id: thisCase.id
                     }, {

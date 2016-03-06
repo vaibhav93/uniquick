@@ -1,44 +1,53 @@
 <div class="modal-header">
-		<h3 class="modal-title">Sales</h3>
-	</div>
-	<div class="modal-body">
-		<div class="container-fluid">
-			<div class="row padding-bottom-10" ng-repeat="sale in sales">
-				<div class="col-md-12">
-					<div class="row padding-bottom-10">
-						Sale by user : <strong>{{sale.user.name}}</strong>
-					</div>
+	<h3 class="modal-title">Sales</h3>
+</div>
+<div class="modal-body">
+	<div class="container-fluid">
+		<div class="row" ng-if="notes.length>0">
+			<h4>Notes</h4>
+			<div class="col-md-12" ng-repeat="(key,note) in notes">
+				<div class="row">
+				<strong>{{key+1}}.</strong> {{note.text}}
 				</div>
-				<div class="col-md-6">
-					<div class="row">
-						Amount : <strong>{{sale.amount}}</strong>
-					</div>
-					<div class="row padding-top-10">
-						Sale date: <strong>{{sale.saledate | date:'mediumDate'}}</strong>
-					</div>
-					<div class="row padding-top-10">
-						Description: <strong>{{sale.desc}}</strong>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="row">
-						Mode : <strong>{{sale.paymentmode}}</strong>
-					</div>
-					<div class="row  padding-top-10">
-						Verification date : <strong>{{sale.verificationdate | date:'mediumDate'}}</strong>
-					</div>
-					<div class="row  padding-top-10">
-						Recording link : <strong>{{sale.recordlink}}</strong>
-					</div>
-				</div>
-				<div class="col-md-12">
-				<hr>
-				</div>
-				
 			</div>
 		</div>
+		<div class="row padding-bottom-10" ng-repeat="sale in sales">
+			<div class="col-md-12">
+				<div class="row padding-bottom-10">
+					Sale by user : <strong>{{sale.user.name}}</strong>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					Amount : <strong>{{sale.amount}}</strong>
+				</div>
+				
+				<div class="row padding-top-10">
+					Description: <strong>{{sale.desc}}</strong>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					Mode : <strong>{{sale.paymentmode}}</strong>
+				</div>
+				<div class="row padding-top-10">
+					Sale date: <strong>{{sale.saledate | date:'mediumDate'}}</strong>
+				</div>
+				<!-- <div class="row  padding-top-10">
+					Verification date : <strong>{{sale.verificationdate | date:'mediumDate'}}</strong>
+				</div> -->
+				<div class="row  padding-top-10">
+					Recording link : <strong>{{sale.recordlink}}</strong>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<hr>
+			</div>
+
+		</div>
 	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="ok()">OK</button>
-		<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
-	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+</div>

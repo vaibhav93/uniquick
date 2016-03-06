@@ -95,12 +95,14 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
                                 id: $stateParams.caseId
                             }, $scope.sale, function(success) {
                                 usSpinnerService.stop('spinner-1');
-                                Case.notes.create({
-                                    id: $stateParams.caseId
-                                }, {
-                                    text: $scope.notes,
-                                    user: user
-                                });
+                                if ($scope.notes.length > 0) {
+                                    Case.notes.create({
+                                        id: $stateParams.caseId
+                                    }, {
+                                        text: $scope.notes,
+                                        user: user
+                                    });
+                                }
                                 $scope.form.reset(form);
                                 // console.log(success);
                                 updateCase($localStorage.role);
