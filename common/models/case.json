@@ -1,43 +1,46 @@
 {
-  "name": "case",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "status": {
-      "type": "string",
-      "required": true
+    "name": "case",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "opendate": {
-      "type": "Date",
-      "required": true
+    "properties": {
+        "status": {
+            "type": "string",
+            "required": true
+        },
+        "opendate": {
+            "type": "Date",
+            "required": true
+        },
+        "closedate": {
+            "type": "Date"
+        },
+        "verificationdate": {
+            "type": "Date"
+        },
+        "level": {
+            "type": "string"
+        },
+        "assigned": {
+            "type": "Object",
+            "default": null
+        }
     },
-    "closedate": {
-      "type": "Date"
+    "validations": [],
+    "relations": {
+        "customer": {
+            "type": "belongsTo",
+            "model": "customer",
+            "foreignKey": ""
+        },
+        "sales": {
+            "type": "hasMany",
+            "model": "sale",
+            "foreignKey": ""
+        }
     },
-    "level": {
-      "type": "string"
-    },
-    "assigned": {
-      "type": "Object",
-      "default": null
-    }
-  },
-  "validations": [],
-  "relations": {
-    "customer": {
-      "type": "belongsTo",
-      "model": "customer",
-      "foreignKey": ""
-    },
-    "sales": {
-      "type": "hasMany",
-      "model": "sale",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": {}
+    "acls": [],
+    "methods": {}
 }

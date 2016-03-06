@@ -158,6 +158,8 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
             }
         };
         $scope.costs = [{
+            amount: '$0.00'
+        }, {
             amount: '$49.99'
         }, {
             amount: '$99.99'

@@ -124,22 +124,7 @@
 							<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.saledate.$valid">Valid !</span>
 
 						</div>
-						<div class="form-group" ng-class="{'has-error':Form.verificationdate.$dirty && Form.verificationdate.$invalid, 'has-success':Form.verificationdate.$valid}">
-							<label for="verificationdate" class="control-label col-md-4">Verification date  <span class="symbol required"></label>
-
-							<div class="col-md-8">
-								<p class="input-group">
-									<input type="text" id="verificationdate" class="form-control" datepicker-popup="{{format}}" ng-model="sale.verificationdate" is-open="openedverify" min-date="'2010-01-01'" max-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default" ng-click="openverify($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button> </span>
-									</p>
-								</div>
-								<span class="error text-small block col-md-8 col-md-offset-4" ng-if="Form.verificationdate.$dirty && Form.verificationdate.$invalid">Sale date is required</span>
-								<span class="success text-small col-md-8 col-md-offset-4" ng-if="Form.verificationdate.$valid">Valid !</span>
-
-							</div>
+	
 							<div class="form-group" ng-class="{'has-error':Form.transactionid.$dirty && Form.transactionid.$invalid, 'has-success':Form.transactionid.$valid}">
 								<label class="control-label col-md-4">
 									Transaction ID  <span class="symbol required"></span>
