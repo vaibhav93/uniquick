@@ -89,7 +89,7 @@
 										<div class="col-md-6">
 											
 											<div style="text-align:right">
-												<a class="btn btn-primary btn-o" ui-sref="app.form.sale({caseId:case.id})">
+												<a ng-disabled="case.sales.length>0" class="btn btn-primary btn-o" ui-sref="app.form.sale({caseId:case.id})">
 													Make sale
 												</a>
 											</div>

@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQUser", "$timeout", "usSpinnerService", "Customer",
-    function($scope, $localStorage, $http, Sale, UQUser, $timeout, usSpinnerService, Customer) {
+app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQUser", "$timeout", "usSpinnerService", "Customer", "Case",
+    function($scope, $localStorage, $http, Sale, UQUser, $timeout, usSpinnerService, Customer, Case) {
         $scope.availableSearchParams = [
             // { key: "transactionid", name: "Transaction ID" },
             {
@@ -37,6 +37,7 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                 $scope.searchResults.length = 0;
             }
         }, true);
+
         $scope.openCase = function(customer) {
             usSpinnerService.spin('spinner-2');
             Customer.cases.create({
@@ -96,11 +97,18 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                             id: customer.id
                         }, function(cases) {
                             customer.cases = cases;
+                            angular.forEach(cases, function(thisCase) {
+                                Case.sales({
+                                    id: thisCase.id
+                                }, function(sales) {
+                                    thisCase.sales = sales;
+                                })
+                            })
                         }, function(err) {
                             console.log(err)
                         })
                     })
-                    console.log($scope.searchResults);
+                    //console.log($scope.searchResults);
                 }, function(err) {
                     usSpinnerService.stop('spinner-1');
                     console.log(err);
