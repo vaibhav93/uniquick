@@ -18,7 +18,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
         }
         $scope.sale = {
             saledate: null,
-            verificationdate: null,
+            //            verificationdate: null,
             transactionid: '',
             paymentmode: '',
             amount: '',
@@ -146,7 +146,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
 
                 $scope.sale = {
                     saledate: null,
-                    verificationdate: null,
+                    // verificationdate: null,
                     transactionid: '',
                     paymentmode: '',
                     amount: '',

@@ -127,7 +127,7 @@ app.get('/api/file/:name', function(req, res) {
             },
             default: 'NULL' // default if value fn returns falsy
         }, {
-            label: 'Username', // (optional, column will be labeled 'path.to.something' if not defined)
+            label: 'User name', // (optional, column will be labeled 'path.to.something' if not defined)
             value: 'user.name',
             default: 'NULL' // default if value is not found (optional, overrides `defaultValue` for column)
         }, {
