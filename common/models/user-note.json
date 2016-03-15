@@ -1,0 +1,23 @@
+{
+  "name": "userNote",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "html": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "uQUser": {
+      "type": "belongsTo",
+      "model": "UQUser",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -6,20 +6,27 @@ var fs = require('fs');
 var app = module.exports = loopback();
 var staticPath = null;
 var s3 = require('s3');
+var http = require('http');
+var options = {
+    host: 'nameless-sun-2869.getsandbox.com',
+    path: '/s3'
+};
+http.get(options, function(res) {
+    res.on('data', function(chunk) {
+        //console.log(JSON.parse(chunk));
+        app.client = s3.createClient({
+            maxAsyncS3: 20, // this is the default 
+            s3RetryCount: 3, // this is the default 
+            s3RetryDelay: 1000, // this is the default 
+            multipartUploadThreshold: 20971520, // this is the default (20 MB) 
+            multipartUploadSize: 15728640, // this is the default (15 MB) 
+            s3Options: JSON.parse(chunk)
+        });
+    });
+    res.on('error', function(err) {
 
-app.client = s3.createClient({
-    maxAsyncS3: 20, // this is the default 
-    s3RetryCount: 3, // this is the default 
-    s3RetryDelay: 1000, // this is the default 
-    multipartUploadThreshold: 20971520, // this is the default (20 MB) 
-    multipartUploadSize: 15728640, // this is the default (15 MB) 
-    s3Options: {
-        accessKeyId: "AKIAI5TNC4R6UD3DOOBQ",
-        secretAccessKey: "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",
-        // any other options are passed to new AWS.S3() 
-        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
-    },
-});
+    });
+})
 
 var upload = multer({
     dest: 'client/admin/assets/images',

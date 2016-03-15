@@ -53,13 +53,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'UI Elements'
             }
-        }).state('app.ui.elements', {
-            url: '/elements',
-            templateUrl: "assets/views/ui_elements.html",
-            title: 'Elements',
-            icon: 'ti-layout-media-left-alt',
+        }).state('app.ui.notes', {
+            url: '/notes',
+            templateUrl: "assets/views/ui_notes.html",
+            title: 'Notes',
+            resolve: loadSequence('notesCtrl'),
             ncyBreadcrumb: {
-                label: 'Elements'
+                label: 'Notes'
             }
         }).state('app.ui.buttons', {
             url: '/buttons',

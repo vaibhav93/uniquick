@@ -1,0 +1,39 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Notes</h1>
+			
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<div ng-controller="notesCtrl" class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-12">
+			<text-angular ng-model="htmlVariable"></text-angular>
+		</div>
+	</div>
+	<div class="row padding-top-5">
+		<div class="col-xs-12">
+			<button class="btn btn-primary btn-o btn-sm" ng-click="saveNotes()">Save</button>
+			<button
+			class="btn btn-primary btn-o btn-sm"
+			mwl-confirm
+			title="{{ title }}"
+			message="Do you wish to delete ?"
+			confirm-text="Confirm"
+			cancel-text="Cancel"
+			placement="top"
+			on-confirm="deleteNote()"
+			on-cancel="cancelClicked = true"
+			confirm-button-type="danger"
+			cancel-button-type="success">
+			Delete
+		</button>
+	</div>
+</div>
+</div>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<!-- end: YOUR CONTENT HERE -->

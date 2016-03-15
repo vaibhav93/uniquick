@@ -55,5 +55,9 @@
   "note": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "userNote": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
