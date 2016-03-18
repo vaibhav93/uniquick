@@ -36,7 +36,7 @@ app.controller('notesCtrl', ["$scope", "UQUser", "UserNote", "$localStorage", "c
                     if (isConfirm) {
                         $scope.saveNotes();
                         $timeout(function() {
-                            $state.go('app.dashboard');
+                            $state.go(toState.name);
                         }, 1000);
                     }
                 });
