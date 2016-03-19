@@ -103,6 +103,11 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                                 }, function(sales) {
                                     thisCase.sales = sales;
                                 })
+                                Case.notes({
+                                    id: thisCase.id
+                                }, function(notes) {
+                                    thisCase.notes = notes;
+                                })
                             })
                         }, function(err) {
                             console.log(err)

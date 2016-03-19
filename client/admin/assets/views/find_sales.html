@@ -111,7 +111,7 @@
 					<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
 						<div class="panel-body">
 							<div ng-repeat="case in customer.cases | filter : {status: '!'+'open'}">
-								<div class="row">
+								<div class="row padding-bottom-10">
 									<div class="col-md-3">
 										<strong>Case ID</strong> : {{case.uid}}
 									</div>
@@ -120,6 +120,12 @@
 									</div>
 									<div class="col-md-3">
 										<strong>Closed on</strong> : {{case.closedate | date:'mediumDate'}}
+									</div>
+									<div class="col-md-12">
+										<strong>Notes</strong>
+										<div ng-repeat="(key,note) in case.notes">
+											<strong>{{key+1}}.</strong> {{note.text}}
+										</div>
 									</div>
 								</div>
 							</div>

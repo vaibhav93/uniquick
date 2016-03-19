@@ -113,7 +113,10 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
                                     type: "success",
                                     confirmButtonColor: "#007AFF"
                                 }, function(isConfirm) {
-                                    $state.go('app.table.mysales');
+                                    if ($localStorage.role != 'admin')
+                                        $state.go('app.table.mysales');
+                                    else
+                                        $state.go('app.dashboard');
                                 });
                                 // $state.go('app.table.mysales');
                             }, function(err) {
