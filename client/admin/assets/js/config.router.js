@@ -262,7 +262,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'findSalesCtrl'),
             data: {
                 permissions: {
-                    only: ['agent', 'supervisor']
+                    only: ['agent', 'supervisor', 'admin', 'technician']
                 }
             }
         }).state('app.table.allsales', {
@@ -349,7 +349,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             resolve: loadSequence('ui.select', 'toaster', 'spin', 'angularSpinner', 'saleCtrl'),
             data: {
                 permissions: {
-                    only: ['agent', 'supervisor', 'technician'],
+                    only: ['agent', 'supervisor', 'technician', 'admin'],
                     redirectTo: 'login.signin'
                 }
             }

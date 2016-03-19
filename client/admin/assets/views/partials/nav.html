@@ -129,7 +129,7 @@
 			</div>
 		</a>
 	</li>
-	<li ng-if="role=='agent'" ui-sref-active="active">
+	<li ng-if="role=='supervisor' || role=='admin' || role=='agent' || role=='technician'" ui-sref-active="active">
 		<a ui-sref="app.table.findsales" ui-sref-opts="{reload:true}">
 			<div class="item-content">
 				<div class="item-media">
