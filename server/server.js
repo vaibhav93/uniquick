@@ -130,7 +130,10 @@ app.get('/api/file/:name', function(req, res) {
         }, {
             label: 'Verification Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
-                return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
+                if (row.saleCase.verificationdate)
+                    return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
+                else
+                    return 'Case open';
             },
             default: 'NULL' // default if value fn returns falsy
         }, {
