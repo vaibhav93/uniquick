@@ -11,6 +11,8 @@ var options = {
     host: 'nameless-sun-2869.getsandbox.com',
     path: '/s3'
 };
+global.Promise = require('bluebird');
+
 http.get(options, function(res) {
     res.on('data', function(chunk) {
         //console.log(JSON.parse(chunk));
@@ -131,7 +133,7 @@ app.get('/api/file/:name', function(req, res) {
             label: 'Verification Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
                 //console.log(row);
-                if (row.saleCase && row.saleCase.verificationdate)
+                if (row.saleCase.verificationdate)
                     return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
                 else
                     return 'Case open';
@@ -191,41 +193,55 @@ app.get('/api/file/:name', function(req, res) {
     app.models.sale.find(function(err, sales) {
         if (err) {
             res.end(err, 'error');
-        }
-        sales.forEach(function(sale) {
-            app.models.Case.findById(sale.caseId, function(err, foundCase) {
-                if (err || !foundCase) {
-                    console.log('------------------------');
-                    console.log('no case found');
-                    console.log(sale);
-                    console.log('------------------------');
-                } else {
-                    // app.models.Customer.findById(foundCase.customerId,function(err,customer){
+        } else {
+            var promises = [];
+            Promise.map(sales, function(sale) {
+                return app.models.Case.findById(sale.caseId).then(function(foundCase) {
                     sale.saleCase = foundCase.toJSON();
-                    // })
-                    foundCase.customer(function(err, customer) {
-                        if (err || !customer)
-                            res.end(err, 'error');
-                        else {
-                            // console.log(customer);
-                            sale.customer = customer;
+                    return app.models.Customer.findById(foundCase.customerId).then(function(customer) {
+                        sale.customer = customer;
+                    });
+                })
+            }).then(function() {
+                json2csv({
+                    data: sales,
+                    fields: fields
+                }, function(err, csv) {
+                    if (err) console.log(err);
+                    else {
+                        fs.writeFile('Downloads/file.csv', csv, function(err) {
+                            if (err) throw err;
+                            //res.sendFile(path.resolve(__dirname, '../Downloads/file.csv'));
+                            res.end(csv);
 
-                            json2csv({
-                                data: sales,
-                                fields: fields
-                            }, function(err, csv) {
-                                if (err) console.log(err);
-                                fs.writeFile('Downloads/file.csv', csv, function(err) {
-                                    if (err) throw err;
-                                    res.sendFile(path.resolve(__dirname, '../Downloads/file.csv'));
-                                });
-                            });
-                        }
-                    })
-                }
+                        });
+                    }
+                });
             })
-        })
+            // sales.forEach(function(sale) {
+            //     app.models.Case.findById(sale.caseId).then(function(foundCase) {
+            //         if (err || !foundCase) {
+            //             console.log('------------------------');
+            //             console.log('no case found');
+            //             console.log(sale);
+            //             console.log('------------------------');
+            //         } else {
+            //             // app.models.Customer.findById(foundCase.customerId,function(err,customer){
+            //             sale.saleCase = foundCase.toJSON();
+            //             // })
+            //             foundCase.customer(function(err, customer) {
+            //                 if (err || !customer)
+            //                     res.end(err, 'error');
+            //                 else {
+            //                     // console.log(customer);
+            //                     sale.customer = customer;
+            //                 }
+            //             })
+            //         }
+            //     })
+            // })
 
+        }
 
 
     });
