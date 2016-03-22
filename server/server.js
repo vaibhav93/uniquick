@@ -131,7 +131,7 @@ app.get('/api/file/:name', function(req, res) {
             label: 'Verification Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
                 //console.log(row);
-                if (row.saleCase.verificationdate)
+                if (row.saleCase && row.saleCase.verificationdate)
                     return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
                 else
                     return 'Case open';
