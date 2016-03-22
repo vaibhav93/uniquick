@@ -150,7 +150,7 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
         $scope.clear = function() {
             $scope.dt = null;
         };
-        $scope.csv = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/api/file/export.csv';
+        $scope.csv = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/api/file/file.csv';
 
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
