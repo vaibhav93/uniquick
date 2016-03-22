@@ -130,7 +130,7 @@ app.get('/api/file/:name', function(req, res) {
         }, {
             label: 'Verification Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
-                console.log(row.saleCase);
+                //console.log(row);
                 if (row.saleCase.verificationdate)
                     return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
                 else
@@ -195,10 +195,13 @@ app.get('/api/file/:name', function(req, res) {
         sales.forEach(function(sale) {
             app.models.Case.findById(sale.caseId, function(err, foundCase) {
                 if (err || !foundCase) {
-                    res.end(err, 'error');
+                    console.log('------------------------');
+                    console.log('no case found');
+                    console.log(sale);
+                    console.log('------------------------');
                 } else {
                     // app.models.Customer.findById(foundCase.customerId,function(err,customer){
-                    sale.saleCase = foundCase;
+                    sale.saleCase = foundCase.toJSON();
                     // })
                     foundCase.customer(function(err, customer) {
                         if (err || !customer)
