@@ -126,7 +126,7 @@ app.get('/api/file/:name', function(req, res) {
         {
             label: 'Sale Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
-                return moment(row.saledate).format('YYYY-MM-DD');
+                return moment(row.saledate).format('MM-DD-YYYY');
             },
             default: 'NULL' // default if value fn returns falsy
         }, {
