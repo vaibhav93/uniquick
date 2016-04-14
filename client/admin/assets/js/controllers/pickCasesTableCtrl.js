@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
-    function($scope, $rootScope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
+app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "moment", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
+    function($scope, $rootScope, $localStorage, moment, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
         $rootScope.$on('reloadTable2', function() {
             $scope.tableParams.reload()
@@ -33,9 +33,10 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
                         return Case.findById({
                             id: caseId
                         }).$promise;
-},                tableParams: function() {
-                    return $scope.tableParams;
-                }
+                    },
+                    tableParams: function() {
+                        return $scope.tableParams;
+                    }
                 }
             });
 
@@ -71,11 +72,16 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
             getData: function($defer, params) {
                 Case.find({
                     filter: {
+                        order: 'opendate DESC',
                         where: {
                             and: [{
                                 status: 'open'
                             }, {
                                 level: 'supervisor'
+                            }, {
+                                opendate: {
+                                    gt: moment().subtract(2, 'days').toDate()
+                                }
                             }]
 
                         }

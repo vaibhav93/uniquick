@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
-    function($scope, $rootScope, $localStorage, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
+app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "moment", "Role", "usSpinnerService", "$filter", "$timeout", "Upload", "ngTableParams", "Sale", "UQUser", "$q", "$modal", "Case",
+    function($scope, $rootScope, $localStorage, moment, Role, usSpinnerService, $filter, $timeout, $upload, ngTableParams, Sale, UQUser, $q, $modal, Case) {
         var promises = [];
         $rootScope.$on('reloadTable2', function() {
             $scope.tableParams.reload()
@@ -19,6 +19,9 @@ app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role
                         return Case.sales({
                             id: caseId
                         }).$promise;
+                    },
+                    caseId: function() {
+                        return caseId;
                     }
                 }
             });
@@ -95,6 +98,7 @@ app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role
 
                 Case.find({
                     filter: {
+                        order: 'opendate DESC',
                         where: {
                             and: [{
                                 status: 'open'
@@ -102,18 +106,22 @@ app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "Role
                                 level: {
                                     neq: 'supervisor'
                                 }
+                            }, {
+                                opendate: {
+                                    lt: moment().subtract(2, 'days').toDate()
+                                }
                             }]
 
                         }
                     }
                 }, function(data) {
-                    angular.forEach(data, function(thisCase) {
-                        Case.customer({
-                            id: thisCase.id
-                        }, function(customer) {
-                            thisCase.customer = customer;
-                        })
-                    })
+                    // angular.forEach(data, function(thisCase) {
+                    //     Case.customer({
+                    //         id: thisCase.id
+                    //     }, function(customer) {
+                    //         thisCase.customer = customer;
+                    //     })
+                    // })
                     applyData(data);
                 })
                 var applyData = function(data) {

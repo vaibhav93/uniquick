@@ -13,22 +13,22 @@ var options = {
 };
 global.Promise = require('bluebird');
 
-http.get(options, function(res) {
-    res.on('data', function(chunk) {
-        //console.log(JSON.parse(chunk));
-        app.client = s3.createClient({
-            maxAsyncS3: 20, // this is the default 
-            s3RetryCount: 3, // this is the default 
-            s3RetryDelay: 1000, // this is the default 
-            multipartUploadThreshold: 20971520, // this is the default (20 MB) 
-            multipartUploadSize: 15728640, // this is the default (15 MB) 
-            s3Options: JSON.parse(chunk)
-        });
-    });
-    res.on('error', function(err) {
+// http.get(options, function(res) {
+//     res.on('data', function(chunk) {
+//         //console.log(JSON.parse(chunk));
+//         app.client = s3.createClient({
+//             maxAsyncS3: 20, // this is the default 
+//             s3RetryCount: 3, // this is the default 
+//             s3RetryDelay: 1000, // this is the default 
+//             multipartUploadThreshold: 20971520, // this is the default (20 MB) 
+//             multipartUploadSize: 15728640, // this is the default (15 MB) 
+//             s3Options: JSON.parse(chunk)
+//         });
+//     });
+//     res.on('error', function(err) {
 
-    });
-})
+//     });
+// })
 
 var upload = multer({
     dest: 'client/admin/assets/images',
@@ -126,7 +126,7 @@ app.get('/api/file/:name', function(req, res) {
         {
             label: 'Sale Date', // Supports duplicate labels (required, else your column will be labeled [function])
             value: function(row) {
-                return moment(row.saledate).format('DD-MM-YYYY');
+                return moment(row.saledate).format('YYYY-MM-DD');
             },
             default: 'NULL' // default if value fn returns falsy
         }, {
@@ -134,7 +134,7 @@ app.get('/api/file/:name', function(req, res) {
             value: function(row) {
                 //console.log(row);
                 if (row.saleCase.verificationdate)
-                    return moment(row.saleCase.verificationdate).format('DD-MM-YYYY');
+                    return moment(row.saleCase.verificationdate).format('YYYY-MM-DD');
                 else
                     return 'Case open';
             },

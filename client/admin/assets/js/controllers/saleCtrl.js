@@ -91,6 +91,7 @@ app.controller('saleCtrl', ["$scope", "$filter", "$state", "SweetAlert", "$timeo
                             $scope.sale.uQUserId = user.id;
                             $scope.sale.user = user;
                             $scope.sale.status = 'Charged';
+                            $scope.sale.transactionid = $scope.sale.transactionid.trim();
                             Case.sales.create({
                                 id: $stateParams.caseId
                             }, $scope.sale, function(success) {

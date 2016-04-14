@@ -2,8 +2,9 @@
 /** 
  * controllers used for the dashboard
  */
-app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$modal",
-    function($scope, $rootScope, Sale, UQUser, $modal) {
+app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$modal", "moment",
+
+    function($scope, $rootScope, Sale, UQUser, $modal, moment) {
 
 
         $scope.settled = Sale.find({
@@ -11,6 +12,10 @@ app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$mod
                 where: {
                     and: [{
                         status: 'Settled'
+                    }, {
+                        saledate: {
+                            gt: moment().startOf('month').toDate()
+                        }
                     }]
                 }
             }
@@ -22,6 +27,10 @@ app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$mod
                 where: {
                     and: [{
                         status: 'Charged'
+                    }, {
+                        saledate: {
+                            gt: moment().startOf('month').toDate()
+                        }
                     }]
                 }
             }
@@ -33,6 +42,10 @@ app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$mod
                 where: {
                     and: [{
                         status: 'Refunded'
+                    }, {
+                        saledate: {
+                            gt: moment().startOf('month').toDate()
+                        }
                     }]
                 }
             }
@@ -44,6 +57,10 @@ app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$mod
                 where: {
                     and: [{
                         status: 'Charge Back'
+                    }, {
+                        saledate: {
+                            gt: moment().startOf('month').toDate()
+                        }
                     }]
                 }
             }
@@ -58,9 +75,8 @@ app.controller('dashboardCtrl', ["$scope", "$rootScope", "Sale", "UQUser", "$mod
                 saleAmount = Number(sale.amount.substring(1));
                 totalAmount = totalAmount + saleAmount;
             })
-            return totalAmount;
+            return totalAmount.toFixed(2);
         };
-
 
 
     }

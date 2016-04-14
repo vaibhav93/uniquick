@@ -25,7 +25,10 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
             {
                 key: "primaryno",
                 name: "Contact"
-            },
+            }, {
+                key: "uid",
+                name: "Customer ID"
+            }
 
         ];
         $scope.newCustomerFlag = false;

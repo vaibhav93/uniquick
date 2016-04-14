@@ -35,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('app.dashboard', {
             url: "/dashboard",
             templateUrl: "assets/views/dashboard.html",
-            resolve: loadSequence('dashboardCtrl'),
+            resolve: loadSequence('moment', 'angularMoment', 'dashboardCtrl'),
             title: 'Dashboard',
             ncyBreadcrumb: {
                 label: 'Dashboard'
@@ -194,7 +194,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Cases'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'casesTableCtrl'),
+            resolve: loadSequence('moment', 'angularMoment', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'casesTableCtrl'),
             data: {
                 permissions: {
                     only: ['admin', 'supervisor']
@@ -220,7 +220,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Cases'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'pickCasesTableCtrl'),
+            resolve: loadSequence('moment', 'angularMoment', 'ui.select', 'ui.mask', 'ngTable', 'closeCaseModalCtrl', 'caseModalCtrl', 'pickCasesTableCtrl'),
             data: {
                 permissions: {
                     only: ['admin', 'supervisor']
@@ -246,7 +246,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Sales'
             },
-            resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'mySalesCtrl'),
+            resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'moment', 'mySalesCtrl'),
             data: {
                 permissions: {
                     only: ['agent', 'supervisor', 'technician']

@@ -120,7 +120,7 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
                                 }
                             }
                         }).$promise.then(function(data) {
-
+                            console.log('date filter');
                             applyData(data);
                         })
                     }

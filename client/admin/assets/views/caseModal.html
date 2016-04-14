@@ -3,11 +3,35 @@
 </div>
 <div class="modal-body">
 	<div class="container-fluid">
-		<div class="row" ng-if="notes.length>0">
+		<div class="row padding-bottom-10">
+			<h4>Customer</h4>
+			<div class="col-md-6">
+				<div class="row">
+					First Name : <strong>{{customer.firstname}}</strong>
+				</div>
+				<div class="row padding-top-10">
+					Last Name : <strong>{{customer.lastname}}</strong>
+				</div>
+				
+				<div class="row padding-top-10">
+					Address: <strong>{{customer.address}}</strong>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					State : <strong>{{customer.state}}</strong>
+				</div>
+				<div class="row padding-top-10">
+					Zip: <strong>{{customer.zip}}</strong>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row padding-bottom-10" ng-if="notes.length>0">
 			<h4>Notes</h4>
 			<div class="col-md-12" ng-repeat="(key,note) in notes">
 				<div class="row">
-				<strong>{{key+1}}.</strong> {{note.text}}
+					<strong>{{key+1}}.</strong> {{note.text}}
 				</div>
 			</div>
 		</div>
