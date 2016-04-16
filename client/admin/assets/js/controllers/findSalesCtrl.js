@@ -31,6 +31,10 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
             }
 
         ];
+        $scope.search1 = {
+            type: 0,
+            id: null
+        };
         $scope.newCustomerFlag = false;
         $scope.searchResults = [];
         $scope.searchParams = {};
@@ -40,7 +44,13 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
                 $scope.searchResults.length = 0;
             }
         }, true);
-
+        $scope.clearFilter = function() {
+            $scope.searchParams = [];
+            $scope.search1 = {
+                type: 0,
+                id: null
+            };
+        }
         $scope.openCase = function(customer) {
             usSpinnerService.spin('spinner-2');
             Customer.cases.create({
@@ -65,67 +75,129 @@ app.controller('findSalesCtrl', ["$scope", "$localStorage", "$http", "Sale", "UQ
         };
         $scope.search = function() {
             usSpinnerService.spin('spinner-1');
+            $scope.searchResults = [];
             // Sale.find({filter:where})
             $timeout(function() {
                 // console.log($scope.searchParams);
                 var filterArr = [];
                 var filterCriteria = {};
                 var filterKeys = Object.keys($scope.searchParams);
-                angular.forEach($scope.searchParams, function(value, key) {
-                    if (key != 'query') {
-                        if (key == 'firstname' || key == 'lastname') {
-                            filterCriteria[key] = {
-                                "like": '.*' + value + '.*',
-                                "options": "i"
-                            };
-                        } else
-                            filterCriteria[key] = value;
-                        filterArr.push(filterCriteria);
-                        filterCriteria = {};
-                    }
-
-                });
-                // console.log(filterArr);
-                Customer.find({
-                    filter: {
-                        where: {
-                            and: filterArr
-                        }
-                    }
-                }, function(customers) {
-                    usSpinnerService.stop('spinner-1');
-                    $scope.searchResults = customers;
-                    angular.forEach($scope.searchResults, function(customer) {
-                        Customer.cases({
-                            id: customer.id
-                        }, function(cases) {
-                            customer.cases = cases;
-                            angular.forEach(cases, function(thisCase) {
-                                Case.sales({
-                                    id: thisCase.id
-                                }, function(sales) {
-                                    thisCase.sales = sales;
+                console.log('Search Params');
+                console.log($scope.searchParams);
+                console.log('--------------');
+                console.log($scope.search1);
+                if ($scope.search1.id && $scope.search1.type !== "0") {
+                    console.log('Search by id is True');
+                    if ($scope.search1.type == 'caseId') {
+                        Case.findOne({
+                            filter: {
+                                where: {
+                                    uid: Number($scope.search1.id)
+                                }
+                            }
+                        }, function(foundCase) {
+                            Case.customer({
+                                id: foundCase.id
+                            }, function(customer) {
+                                $scope.searchResults = [customer];
+                                resultsLoop($scope.searchResults);
+                            }, function(err) {
+                                usSpinnerService.stop('spinner-1');
+                            });
+                        }, function(err) {
+                            usSpinnerService.stop('spinner-1');
+                        })
+                    } else {
+                        Sale.findOne({
+                            filter: {
+                                where: {
+                                    transactionid: $scope.search1.id
+                                }
+                            }
+                        }, function(sale) {
+                            Sale.case({
+                                id: sale.id
+                            }, function(foundCase) {
+                                Case.customer({
+                                    id: foundCase.id
+                                }, function(customer) {
+                                    $scope.searchResults = [customer];
+                                    resultsLoop($scope.searchResults);
+                                }, function(err) {
+                                    usSpinnerService.stop('spinner-1');
                                 })
-                                Case.notes({
-                                    id: thisCase.id
-                                }, function(notes) {
-                                    thisCase.notes = notes;
-                                })
+                            }, function(err) {
+                                usSpinnerService.stop('spinner-1');
                             })
                         }, function(err) {
-                            console.log(err)
+                            usSpinnerService.stop('spinner-1');
+                            console.log(err);
                         })
+                    }
+                } else {
+                    angular.forEach($scope.searchParams, function(value, key) {
+                        if (key != 'query') {
+                            if (key == 'firstname' || key == 'lastname') {
+                                filterCriteria[key] = {
+                                    "like": '.*' + value + '.*',
+                                    "options": "i"
+                                };
+                            } else
+                                filterCriteria[key] = value;
+
+                            filterArr.push(filterCriteria);
+                            filterCriteria = {};
+                        }
+
+                    });
+                    console.log('filter array');
+                    console.log(filterArr);
+                    Customer.find({
+                        filter: {
+                            where: {
+                                and: filterArr
+                            }
+                        }
+                    }, function(customers) {
+
+                        $scope.searchResults = customers;
+                        resultsLoop($scope.searchResults);
+                        //console.log($scope.searchResults);
+                    }, function(err) {
+                        usSpinnerService.stop('spinner-1');
+                        console.log(err);
                     })
-                    //console.log($scope.searchResults);
-                }, function(err) {
-                    usSpinnerService.stop('spinner-1');
-                    console.log(err);
-                })
+                }
+                // console.log(filterArr);
+
             }, 1500);
 
 
         }
-
+        var resultsLoop = function(list) {
+            usSpinnerService.stop('spinner-1');
+            angular.forEach(list, function(customer) {
+                Customer.cases({
+                    id: customer.id
+                }, function(cases) {
+                    customer.cases = cases;
+                    angular.forEach(cases, function(thisCase) {
+                        Case.sales({
+                            id: thisCase.id
+                        }, function(sales) {
+                            thisCase.sales = sales;
+                        })
+                        Case.notes({
+                            id: thisCase.id
+                        }, function(notes) {
+                            thisCase.notes = notes;
+                        })
+                    })
+                }, function(err) {
+                    console.log(err)
+                })
+            })
+        }
         $scope.childObject = {
             sale: {
                 firstname: '',
