@@ -70,45 +70,55 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
         }, {
             total: 0, // length of data
             getData: function($defer, params) {
-                Case.find({
-                    filter: {
-                        order: 'opendate DESC',
-                        where: {
-                            and: [{
-                                status: 'open'
-                            }, {
-                                level: 'supervisor'
-                            }, {
-                                opendate: {
-                                    gt: moment().subtract(2, 'days').toDate()
-                                }
-                            }]
-
+                var whereFilter = {
+                    and: [{
+                        status: 'open'
+                    }, {
+                        level: 'supervisor'
+                    }, {
+                        opendate: {
+                            gt: moment().subtract(2, 'days').toDate()
                         }
-                    }
-                }, function(data) {
-                    angular.forEach(data, function(case1) {
-                        Case.customer({
-                            id: case1.id
-                        }, function(customer) {
-                            case1.customer = customer;
+                    }]
+
+                };
+                Case.count({
+                    where: whereFilter
+
+                }, function(count) {
+                    console.log('count is:' + count.count);
+                    Case.find({
+                        filter: {
+                            order: 'opendate DESC',
+                            skip: params.count() * (params.page() - 1),
+                            limit: params.count(),
+                            where: whereFilter
+                        }
+                    }, function(data) {
+                        angular.forEach(data, function(case1) {
+                            Case.customer({
+                                id: case1.id
+                            }, function(customer) {
+                                case1.customer = customer;
+                            });
+                            Case.sales({
+                                id: case1.id
+                            }, function(sales) {
+                                case1.sale = sales[0];
+                            })
                         });
-                        Case.sales({
-                            id: case1.id
-                        }, function(sales) {
-                            case1.sale = sales[0];
-                        })
-                    });
-                    applyData(data);
+                        applyData(count.count, data);
+                    })
                 })
-                var applyData = function(data) {
+
+                var applyData = function(count, data) {
                     params.total(data.length);
                     var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    params.total(orderedData.length);
+                    // $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    params.total(count);
                     // set total for recalc pagination
-                    $defer.resolve($scope.vendors);
+                    $defer.resolve(orderedData);
 
                 }
 

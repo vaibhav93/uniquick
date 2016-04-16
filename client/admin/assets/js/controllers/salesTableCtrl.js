@@ -80,61 +80,86 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
         }, {
             total: 0, // length of data
             getData: function($defer, params) {
+                console.log('page number:' + params.page());
+                console.log('count:' + params.count());
                 // use build-in angular filter
-                if ($stateParams.uQuserId && $localStorage.role == 'users') {
-                    if (!$scope.start || !$scope.end) {
-                        UQUser.sales({
-                            id: $stateParams.uQuserId
-                        }).$promise.then(function(data) {
+                // if ($stateParams.uQuserId && $localStorage.role == 'users') {
+                //     if (!$scope.start || !$scope.end) {
+                //         UQUser.sales({
+                //             id: $stateParams.uQuserId,
+                //             order: 'saledate DESC',
+                //         }).$promise.then(function(data) {
 
-                            applyData(data);
-                        })
-                    } else {
-                        UQUser.sales({
-                            id: $stateParams.uQuserId,
-                            filter: {
-                                where: {
-                                    saledate: {
-                                        between: [$scope.start, $scope.end]
-                                    }
-                                }
-                            }
-                        }).$promise.then(function(data) {
+                //             applyData(data);
+                //         })
+                //     } else {
+                //         UQUser.sales({
+                //             id: $stateParams.uQuserId,
 
-                            applyData(data);
+                //             filter: {
+                //                 order: 'saledate DESC',
+                //                 where: {
+                //                     saledate: {
+                //                         between: [$scope.start, $scope.end]
+                //                     }
+                //                 }
+                //             }
+                //         }).$promise.then(function(data) {
+
+                //             applyData(data);
+                //         })
+                //     }
+                // } else {
+                if (!$scope.start || !$scope.end) {
+                    var filter = {
+                        filter: {
+                            order: 'saledate DESC',
+                            skip: (params.page() - 1) * params.count(),
+                            limit: params.count(),
+                        }
+                    };
+                    Sale.count(function(count) {
+                        Sale.find(filter).$promise.then(function(data) {
+
+                            applyData(count.count, data);
                         })
-                    }
+                    })
+
                 } else {
-                    if (!$scope.start || !$scope.end) {
-                        Sale.find().$promise.then(function(data) {
+                    var filter = {
+                        filter: {
+                            order: 'saledate DESC',
+                            skip: (params.page() - 1) * params.count(),
+                            limit: params.count(),
+                            where: {
 
-                            applyData(data);
-                        })
-                    } else {
-                        Sale.find({
-                            filter: {
-                                where: {
-                                    saledate: {
-                                        between: [$scope.start, $scope.end]
-                                    }
+                                saledate: {
+                                    between: [$scope.start, $scope.end]
                                 }
                             }
-                        }).$promise.then(function(data) {
+                        }
+                    };
+                    Sale.count(filter, function(count) {
+
+                        Sale.find(filter).$promise.then(function(data) {
                             console.log('date filter');
-                            applyData(data);
+                            applyData(count.count, data);
                         })
-                    }
+                    })
 
                 }
 
-                var applyData = function(data) {
-                    params.total(data.length);
+                // }
+
+                var applyData = function(count, data) {
+                    //params.total(data.length);
+                    console.log('count is::' + count);
                     var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    params.total(orderedData.length);
+                    // $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    params.total(count);
                     // set total for recalc pagination
-                    $defer.resolve($scope.vendors);
+                    $defer.resolve(orderedData);
 
                 }
 
