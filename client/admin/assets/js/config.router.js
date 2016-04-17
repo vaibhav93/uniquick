@@ -278,6 +278,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                     only: ['admin']
                 }
             }
+        }).state('app.table.allsalesagent', {
+            url: '/allsaleagent',
+            templateUrl: "assets/views/table_sales_agent.html",
+            title: 'Sales Table',
+            ncyBreadcrumb: {
+                label: 'Sales'
+            },
+            resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'ngTable', 'agentSalesTableCtrl'),
+            data: {
+                permissions: {
+                    only: ['supervisor']
+                }
+            }
         }).state('app.table.booking', {
             url: '/bookings',
             templateUrl: "assets/views/table_booking.html",

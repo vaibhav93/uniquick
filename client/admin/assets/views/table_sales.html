@@ -49,7 +49,7 @@
 							</div>
 							</div>
 							<div class="col-xs-4" style="margin:8px 0">
-							<button class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="updateStatus(sale)">Submit</button>
+							<button ng-disabled="!sale.newStatus" class="btn btn-success btn-sm" id="editRowBtn{{sale.id}}" ng-click="updateStatus(sale)">Submit</button>
 							</div>
 							
 						</td>

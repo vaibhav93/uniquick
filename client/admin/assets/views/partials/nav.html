@@ -105,6 +105,18 @@
 			</div>
 		</a>
 	</li>
+	<li ng-if="role=='supervisor'" ui-sref-active="active">
+		<a ui-sref="app.table.allsalesagent">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-stats-up"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Agent Sales </span>
+				</div>
+			</div>
+		</a>
+	</li>
 <!-- 	<li ng-if="role=='agent'" ui-sref-active="active">
 		<a ui-sref="app.form.sale">
 			<div class="item-content">

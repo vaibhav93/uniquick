@@ -65,6 +65,7 @@ app.constant('JS_REQUIRES', {
         'closedCasesCtrl': 'assets/js/controllers/closedCasesCtrl.js',
         'closeCaseModalCtrl': 'assets/js/controllers/closeCaseModalCtrl.js',
         'notesCtrl': 'assets/js/controllers/notesCtrl.js',
+        'agentSalesTableCtrl': 'assets/js/controllers/agentSalesTableCtrl.js',
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
     },
