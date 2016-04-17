@@ -41,10 +41,10 @@
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="sale in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
-						<td width="10%" data-title="'Transaction ID'" filter="{ 'transactionid': 'text'}">{{sale.transactionid}}</td>
-						<td width="8%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
+						<td width="15%" data-title="'Transaction ID'" filter="{ 'transactionid': 'text'}">{{sale.transactionid}}</td>
+						<td width="15%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
 						
-						<td width="8%" data-title="'Amount'">{{sale.amount}}</td>
+						<td width="15%" data-title="'Amount'">{{sale.amount}}</td>
 						<td width="10%" data-title="'Status'" filter="{ 'status': 'text'}"><span ng-class="getStatusClass(sale.status)">{{sale.status | uppercase}}</span></td>
 						<td width="30%" data-title="'Change Status'">
 							
@@ -65,7 +65,28 @@
 				</div>
 
 			</td>
-
+			<!-- <td width="20%" data-title="'Close case'">
+				<div class="pull-left margin-right-10">
+					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="closeCase(sale.id)">Close case</button>
+				</div>
+			</td> -->
+			<td width="20%" data-title="'Close case'">
+								<button
+								
+								class="btn btn-primary btn-o btn-sm"
+								mwl-confirm
+								title="{{ title }}"
+								message="Do you wish to close case ?"
+								confirm-text="Confirm"
+								cancel-text="Cancel"
+								placement="bottom"
+								on-confirm="closeCase(sale.id)"
+								on-cancel="cancelClicked = true"
+								confirm-button-type="danger"
+								cancel-button-type="success">
+								Close case
+							</button>
+						</td>
 			<!-- <td ng-if="role=='admin'" width="10%" data-title="'View Complete'">
 				<div class="pull-left margin-right-10">
 					<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{sale.id}}" ng-click="openModal(sale.id)">view</button>

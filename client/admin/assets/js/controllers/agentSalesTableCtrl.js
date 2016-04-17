@@ -89,7 +89,13 @@ app.controller('agentSalesTableCtrl', ["$scope", "$localStorage", "usSpinnerServ
                     console.log('delete error :' + error)
                 });
         }
-
+        $scope.closeCase = function(saleId) {
+            Sale.case({
+                id: saleId
+            }, function(foundCase) {
+                console.log(foundCase);
+            })
+        };
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 10, // count per page
