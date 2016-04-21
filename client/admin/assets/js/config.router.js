@@ -246,7 +246,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Sales'
             },
-            resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'moment', 'mySalesCtrl'),
+            resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'moment', 'angularMoment', 'mySalesCtrl'),
             data: {
                 permissions: {
                     only: ['agent', 'supervisor', 'technician']
