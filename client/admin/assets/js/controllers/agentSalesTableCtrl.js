@@ -98,7 +98,7 @@ app.controller('agentSalesTableCtrl', ["$scope", "$localStorage", "usSpinnerServ
         };
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
-            count: 10, // count per page
+            count: 50, // count per page
             filter: {
 
             },
