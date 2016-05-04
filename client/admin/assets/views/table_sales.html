@@ -12,6 +12,24 @@
 		
 <!-- start: TABLE WITH FILTERS -->
 <div ng-controller="salesTableCtrl" class="container-fluid container-fullw">
+	
+	<form role="form" class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="inputEmail3" style="text-align:left">
+										Transaction ID
+									</label>
+									<div class="col-sm-4">
+										<input type="type" ng-model="searchId" id="inputEmail3" class="form-control">
+									</div>
+								</div>
+								
+								<div class="form-group margin-bottom-0">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="button" ng-click="searchById()" class="btn btn-success btn-sm">Search</button>
+										<button type="button" ng-click="clearById()" class="btn btn-warning btn-sm">Clear</button>
+									</div>
+								</div>
+							</form>
 	<div class="row">
 	<span us-spinner spinner-key="spinner-1"></span> 
 		<div class="col-md-6">
@@ -29,7 +47,7 @@
 			<table ng-table="tableParams" show-filter="true" class="table">
 				<tbody ng-repeat="sale in $data">
 					<tr ng-class-odd="'odd'" ng-class-even="'even'">
-						<td width="10%" data-title="'Transaction ID'" filter="{ 'transactionid': 'text'}">{{sale.transactionid}}</td>
+						<td width="10%" data-title="'Transaction ID'">{{sale.transactionid}}</td>
 						<td width="8%" data-title="'Sale Date'">{{sale.saledate | date:'mediumDate'}}</td>
 						
 						<td width="8%" data-title="'Amount'">{{sale.amount}}</td>

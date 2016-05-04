@@ -82,40 +82,17 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
             getData: function($defer, params) {
                 console.log('page number:' + params.page());
                 console.log('count:' + params.count());
-                // use build-in angular filter
-                // if ($stateParams.uQuserId && $localStorage.role == 'users') {
-                //     if (!$scope.start || !$scope.end) {
-                //         UQUser.sales({
-                //             id: $stateParams.uQuserId,
-                //             order: 'saledate DESC',
-                //         }).$promise.then(function(data) {
-
-                //             applyData(data);
-                //         })
-                //     } else {
-                //         UQUser.sales({
-                //             id: $stateParams.uQuserId,
-
-                //             filter: {
-                //                 order: 'saledate DESC',
-                //                 where: {
-                //                     saledate: {
-                //                         between: [$scope.start, $scope.end]
-                //                     }
-                //                 }
-                //             }
-                //         }).$promise.then(function(data) {
-
-                //             applyData(data);
-                //         })
-                //     }
-                // } else {
+                var whereObj = {};
+                if ($scope.searchId) {
+                    whereObj.transactionid = $scope.searchId;
+                }
                 if (!$scope.start || !$scope.end) {
                     var filter = {
                         filter: {
                             order: 'saledate DESC',
                             skip: (params.page() - 1) * params.count(),
                             limit: params.count(),
+                            where: whereObj
                         }
                     };
                     Sale.count(function(count) {
@@ -207,6 +184,15 @@ app.controller('salesTableCtrl', ["$scope", "$localStorage", "usSpinnerService",
         $scope.startChange = function(startDate) {
             $scope.tableParams.reload();
             console.log(startDate);
+        }
+        $scope.searchById = function() {
+            if ($scope.searchId) {
+                $scope.tableParams.reload();
+            }
+        }
+        $scope.clearById = function() {
+            $scope.searchId = null;
+            $scope.tableParams.reload();
         }
         $scope.startOpen = function($event) {
             console.log('opened');
