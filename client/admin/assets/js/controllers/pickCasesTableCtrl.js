@@ -19,6 +19,9 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
                         return Case.sales({
                             id: caseId
                         }).$promise;
+                    },
+                    caseId: function() {
+                        return caseId;
                     }
                 }
             });
@@ -77,7 +80,7 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
                         level: 'supervisor'
                     }, {
                         opendate: {
-                            gt: moment().subtract(2, 'days').toDate()
+                            lt: moment().subtract(2, 'days').toDate()
                         }
                     }]
 
