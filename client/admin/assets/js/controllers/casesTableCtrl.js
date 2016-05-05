@@ -104,7 +104,7 @@ app.controller('casesTableCtrl', ["$scope", "$rootScope", "$localStorage", "mome
                         }
                     }, {
                         opendate: {
-                            lt: moment().subtract(2, 'days').toDate()
+                            gt: moment().subtract(2, 'days').toDate()
                         }
                     }]
 
