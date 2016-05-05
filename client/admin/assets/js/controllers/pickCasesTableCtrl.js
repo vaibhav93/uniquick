@@ -80,7 +80,7 @@ app.controller('pickCasesTableCtrl', ["$scope", "$rootScope", "$localStorage", "
                         level: 'supervisor'
                     }, {
                         opendate: {
-                            lt: moment().subtract(2, 'days').toDate()
+                            gt: moment().subtract(2, 'days').toDate()
                         }
                     }]
 
